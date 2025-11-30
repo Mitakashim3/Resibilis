@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   authors: [{ name: 'Resibilis Team' }],
   creator: 'Resibilis',
   icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
+    icon: '/ResibilisLogo.svg',
+    apple: '/ResibilisLogo.svg',
   },
   openGraph: {
     type: 'website',
