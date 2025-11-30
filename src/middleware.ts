@@ -87,6 +87,13 @@ export async function middleware(req: NextRequest) {
     );
   }
 
+  // Add cache control for security
+  if (req.nextUrl.pathname.startsWith('/api/')) {
+    res.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.headers.set('Pragma', 'no-cache');
+    res.headers.set('Expires', '0');
+  }
+
   return res;
 }
 

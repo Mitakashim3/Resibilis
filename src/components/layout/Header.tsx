@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/ui';
 import { AuthButton, UserMenu } from '@/components/auth';
-import { Package } from 'lucide-react';
+import { Package, Crown } from 'lucide-react';
 import type { User } from '@supabase/supabase-js';
 
 interface HeaderProps {
@@ -40,6 +40,26 @@ export function Header({ user }: HeaderProps) {
                 >
                   <Package className="w-4 h-4" />
                   Products
+                </Link>
+                <Link
+                  href="/pricing"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 transition-colors"
+                >
+                  <Crown className="w-4 h-4" />
+                  Upgrade
+                </Link>
+              </nav>
+            )}
+
+            {/* Pricing link for non-authenticated users */}
+            {!user && (
+              <nav className="hidden sm:flex items-center gap-1 ml-4">
+                <Link
+                  href="/pricing"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 transition-colors"
+                >
+                  <Crown className="w-4 h-4" />
+                  Pricing
                 </Link>
               </nav>
             )}

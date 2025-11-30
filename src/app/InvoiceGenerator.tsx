@@ -9,6 +9,7 @@ import type { ReceiptDimension } from '@/components/invoice';
 import { InvoiceHistory } from '@/components/invoice';
 import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components/ui';
 import { AuthButton } from '@/components/auth';
+import { PremiumPromo } from '@/components/premium';
 import {
   InvoiceFormData,
   defaultInvoiceValues,
@@ -179,6 +180,9 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
 
   return (
     <div className="space-y-6">
+      {/* Premium Banner for Guest Users */}
+      {!user && <PremiumPromo variant="banner" />}
+
       {/* Hero Section */}
       <div className="text-center mb-8">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -225,19 +229,7 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
           </Card>
 
           {/* Auth Prompt for Guest Users */}
-          {!user && (
-            <Card variant="bordered" className="bg-primary-50 dark:bg-primary-900/20 border-primary-200 dark:border-primary-800">
-              <CardContent className="text-center py-6">
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Want to save your receipts?
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  Sign in to keep a history of all your receipts
-                </p>
-                <AuthButton />
-              </CardContent>
-            </Card>
-          )}
+          {!user && <PremiumPromo variant="card" />}
 
           {/* History for Authenticated Users */}
           {user && <InvoiceHistory userId={user.id} />}
