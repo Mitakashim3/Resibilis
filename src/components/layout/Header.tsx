@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ThemeToggle } from '@/components/ui';
 import { AuthButton, UserMenu } from '@/components/auth';
 import { Package, Crown } from 'lucide-react';
@@ -18,9 +19,13 @@ export function Header({ user }: HeaderProps) {
           {/* Logo */}
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">R</span>
-              </div>
+              <Image
+                src="/logo.svg"
+                alt="Resibilis Logo"
+                width={40}
+                height={40}
+                className="rounded-lg"
+              />
               <div>
                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                   Resibilis
