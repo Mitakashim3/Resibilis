@@ -75,11 +75,20 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
     if (!previewRef.current) return;
 
     try {
+      // Get the actual dimensions of the element
+      const element = previewRef.current;
+      const width = element.offsetWidth;
+      const height = element.offsetHeight;
+
       // Generate PNG from the preview element
-      const dataUrl = await toPng(previewRef.current, {
+      const dataUrl = await toPng(element, {
         quality: 1,
         pixelRatio: 2, // High quality
         backgroundColor: '#ffffff',
+        width: width,
+        height: height,
+        skipFonts: true, // Skip external fonts to prevent fetch errors
+        cacheBust: true,
       });
 
       // Create download link
@@ -108,6 +117,8 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
         quality: 1,
         pixelRatio: 2,
         backgroundColor: '#ffffff',
+        skipFonts: true,
+        cacheBust: true,
       });
 
       const pdf = new jsPDF({
@@ -116,8 +127,9 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
         format: 'a5',
       });
 
-      // Add image to PDF
-      const imgWidth = 130;
+      // Add image to PDF with proper scaling
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const imgWidth = pdfWidth - 20; // 10mm margins on each side
       const imgHeight = (previewRef.current.offsetHeight / previewRef.current.offsetWidth) * imgWidth;
       pdf.addImage(dataUrl, 'PNG', 10, 10, imgWidth, imgHeight);
       pdf.save(`resibo-${generateInvoiceNumber()}.pdf`);
@@ -282,8 +294,10 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
                   </Button>
                 </div>
               </CardHeader>
-              <CardContent className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 overflow-x-auto">
-                <InvoicePreview ref={previewRef} data={formData} dimension={dimension} />
+              <CardContent className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 overflow-visible">
+                <div className="overflow-x-auto">
+                  <InvoicePreview ref={previewRef} data={formData} dimension={dimension} />
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -350,8 +364,10 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
             </div>
 
             {/* Modal Content */}
-            <div className="flex-1 overflow-y-auto p-4 bg-gray-100 dark:bg-gray-900">
-              <InvoicePreview ref={previewRef} data={formData} dimension={dimension} />
+            <div className="flex-1 overflow-auto p-4 bg-gray-100 dark:bg-gray-900">
+              <div className="overflow-x-auto">
+                <InvoicePreview ref={previewRef} data={formData} dimension={dimension} />
+              </div>
             </div>
 
             {/* Modal Actions */}

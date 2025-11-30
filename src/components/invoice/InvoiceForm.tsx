@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -8,11 +8,12 @@ import {
   InvoiceFormData,
   createEmptyItem,
   defaultInvoiceValues,
+  Language,
 } from '@/lib/schemas';
 import { Button, Input, Textarea, Select, Modal } from '@/components/ui';
 import { cn } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
-import { Package, Wrench, ChevronDown } from 'lucide-react';
+import { Package, Wrench, ChevronDown, Languages } from 'lucide-react';
 import type { Database } from '@/types/database';
 
 // Receipt dimension options
@@ -115,17 +116,19 @@ export function InvoiceForm({
   // Watch form changes and notify parent
   const formData = watch();
   
-  // Debounced update to parent
-  const handleFormChange = () => {
+  // Update parent with current form data
+  const handleFormChange = useCallback(() => {
+    // Get latest form values using getValues for immediate response
+    const currentData = watch();
     // Validate and transform data before sending
-    const result = invoiceFormSchema.safeParse(formData);
+    const result = invoiceFormSchema.safeParse(currentData);
     if (result.success) {
       onDataChange(result.data);
     } else {
       // Send partial data for preview even if not fully valid
-      onDataChange(formData);
+      onDataChange(currentData);
     }
-  };
+  }, [watch, onDataChange]);
 
   const handleDimensionChange = (dimension: ReceiptDimension) => {
     setSelectedDimension(dimension);
@@ -189,6 +192,61 @@ export function InvoiceForm({
         </div>
       </div>
 
+      {/* Language Toggle */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+          Receipt Language / Wika ng Resibo
+        </label>
+        <Controller
+          name="language"
+          control={control}
+          render={({ field }) => (
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  field.onChange('en');
+                  handleFormChange();
+                }}
+                className={cn(
+                  'flex-1 flex items-center justify-center gap-2 p-3 rounded-lg border text-sm transition-all',
+                  field.value === 'en'
+                    ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300'
+                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                )}
+              >
+                <Languages className="w-4 h-4" />
+                <span className="font-medium">English</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  field.onChange('tl');
+                  handleFormChange();
+                }}
+                className={cn(
+                  'flex-1 flex items-center justify-center gap-2 p-3 rounded-lg border text-sm transition-all',
+                  field.value === 'tl'
+                    ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300'
+                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                )}
+              >
+                <Languages className="w-4 h-4" />
+                <span className="font-medium">Tagalog</span>
+              </button>
+            </div>
+          )}
+        />
+      </div>
+
+      {/* Business Name / Receipt Title */}
+      <Input
+        label="Business Name / Pangalan ng Negosyo (Optional)"
+        placeholder="My Business Name / RESIBILIS"
+        error={errors.businessName?.message}
+        {...register('businessName')}
+      />
+
       {/* Customer Name */}
       <Input
         label="Customer Name / Pangalan ng Customer"
@@ -202,11 +260,32 @@ export function InvoiceForm({
         name="currency"
         control={control}
         render={({ field }) => (
-          <Select
-            label="Currency / Pera"
-            options={currencyOptions}
-            {...field}
-          />
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+              Currency / Pera
+            </label>
+            <div className="flex gap-2">
+              {currencyOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => {
+                    field.onChange(option.value);
+                    // Trigger immediate update
+                    setTimeout(handleFormChange, 0);
+                  }}
+                  className={cn(
+                    'flex-1 p-3 rounded-lg border text-sm transition-all',
+                    field.value === option.value
+                      ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300'
+                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                  )}
+                >
+                  <div className="font-medium">{option.label}</div>
+                </button>
+              ))}
+            </div>
+          </div>
         )}
       />
 

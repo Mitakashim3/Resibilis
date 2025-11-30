@@ -48,8 +48,12 @@ export const invoiceItemSchema = z.object({
 
 export type InvoiceItem = z.infer<typeof invoiceItemSchema>;
 
+// Language type for receipt translations
+export type Language = 'en' | 'tl';
+
 // Main invoice form schema
 export const invoiceFormSchema = z.object({
+  businessName: sanitizedString(200).optional().default(''),
   customerName: sanitizedString(200).refine(
     (val) => val.length >= 1,
     'Customer name is required'
@@ -60,6 +64,7 @@ export const invoiceFormSchema = z.object({
     .max(50, 'Maximum 50 items per invoice'),
   notes: sanitizedString(1000).optional().default(''),
   currency: z.enum(['PHP', 'USD']).default('PHP'),
+  language: z.enum(['en', 'tl']).default('en'),
 });
 
 export type InvoiceFormData = z.infer<typeof invoiceFormSchema>;
@@ -102,8 +107,10 @@ export function createEmptyItem(): InvoiceItem {
 
 // Default form values
 export const defaultInvoiceValues: InvoiceFormData = {
+  businessName: '',
   customerName: '',
   items: [createEmptyItem()],
   notes: '',
   currency: 'PHP',
+  language: 'en',
 };
