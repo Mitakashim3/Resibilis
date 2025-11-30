@@ -44,14 +44,15 @@ export async function middleware(req: NextRequest) {
   
   // Content Security Policy - Strict policy to prevent XSS
   // Using nonce would be better but requires more setup
+  // Google AdSense domains are included but only load when ADS_ENABLED is true in layout.tsx
   const cspDirectives = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://pagead2.googlesyndication.com https://adservice.google.com https://www.googletagservices.com https://partner.googleadservices.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "img-src 'self' data: blob: https://lh3.googleusercontent.com https://*.supabase.co",
+    "img-src 'self' data: blob: https://lh3.googleusercontent.com https://*.supabase.co https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://*.google.com",
     "font-src 'self' https://fonts.gstatic.com",
-    "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://accounts.google.com",
-    "frame-src 'self' https://accounts.google.com https://*.supabase.co",
+    "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://accounts.google.com https://pagead2.googlesyndication.com https://*.google.com",
+    "frame-src 'self' https://accounts.google.com https://*.supabase.co https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com",
     "frame-ancestors 'none'",
     "form-action 'self'",
     "base-uri 'self'",

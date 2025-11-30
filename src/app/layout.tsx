@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Resibilis Team' }],
   creator: 'Resibilis',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_PH',
@@ -48,6 +52,10 @@ export const viewport: Viewport = {
   ],
 };
 
+// Set to true when AdSense is approved
+const ADS_ENABLED = true;
+const ADSENSE_PUBLISHER_ID = 'ca-pub-8782757148864843'; // Replace with your ID
+
 export default function RootLayout({
   children,
 }: {
@@ -55,6 +63,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Google AdSense - Enable when approved */}
+        {ADS_ENABLED && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
+            crossOrigin="anonymous"
+          />
+        )}
+      </head>
       <body className="min-h-screen flex flex-col">
         <Providers>{children}</Providers>
       </body>

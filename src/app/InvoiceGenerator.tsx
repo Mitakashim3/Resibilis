@@ -10,6 +10,7 @@ import { InvoiceHistory } from '@/components/invoice';
 import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components/ui';
 import { AuthButton } from '@/components/auth';
 import { PremiumPromo } from '@/components/premium';
+import { Ad } from '@/components/ads';
 import {
   InvoiceFormData,
   defaultInvoiceValues,
@@ -233,6 +234,14 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
 
           {/* History for Authenticated Users */}
           {user && <InvoiceHistory userId={user.id} />}
+
+          {/* Ad Placement - Below Form/History */}
+          <Ad 
+            slot="YOUR_AD_SLOT_ID" 
+            size="rectangle" 
+            className="mx-auto"
+            showPlaceholder={true} // Set to false in production
+          />
         </div>
 
         {/* Right Column: Preview (Desktop) */}
