@@ -24,7 +24,7 @@ export function Header({ user }: HeaderProps) {
                 alt="Resibilis Logo"
                 width={40}
                 height={40}
-                className="rounded-lg"
+                className="rounded-full"
               />
               <div>
                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">
