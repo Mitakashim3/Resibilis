@@ -60,6 +60,18 @@ export function Header({ user }: HeaderProps) {
             {!user && (
               <nav className="hidden sm:flex items-center gap-1 ml-4">
                 <Link
+                  href="/about"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                >
+                  About
+                </Link>
+                <Link
+                  href="/how-to-use"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                >
+                  How to Use
+                </Link>
+                <Link
                   href="/pricing"
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 transition-colors"
                 >
