@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Button } from './Button';
 import { cn } from '@/lib/utils';
 
@@ -22,6 +23,11 @@ export function Modal({
   size = 'md',
 }: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close on escape key
   useEffect(() => {
@@ -38,7 +44,7 @@ export function Modal({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   const sizes = {
     sm: 'max-w-sm',
@@ -47,18 +53,18 @@ export function Modal({
     xl: 'max-w-xl',
   };
 
-  return (
+  return createPortal(
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
       onClick={(e) => {
         if (e.target === overlayRef.current) onClose();
       }}
     >
       <div
         className={cn(
-          'w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl',
-          'transform transition-all',
+          'w-full glass-panel rounded-2xl shadow-2xl',
+          'transform transition-all animate-in fade-in zoom-in-95 duration-200',
           sizes[size]
         )}
         role="dialog"
@@ -66,20 +72,20 @@ export function Modal({
         aria-labelledby="modal-title"
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between p-4 border-b border-primary-200/30 dark:border-primary-700/30">
           <h2
             id="modal-title"
-            className="text-lg font-semibold text-gray-900 dark:text-white"
+            className="text-lg font-semibold text-foreground"
           >
             {title}
           </h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-2 hover:bg-primary-100/50 dark:hover:bg-primary-800/50 rounded-lg transition-colors text-primary-600 dark:text-primary-400"
             aria-label="Close modal"
           >
             <svg
-              className="w-5 h-5 text-gray-500"
+              className="w-5 h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -95,16 +101,17 @@ export function Modal({
         </div>
 
         {/* Content */}
-        <div className="p-4">{children}</div>
+        <div className="p-4 text-foreground">{children}</div>
 
         {/* Footer */}
         {footer && (
-          <div className="flex justify-end gap-3 p-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex justify-end gap-3 p-4 border-t border-primary-200/30 dark:border-primary-700/30">
             {footer}
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

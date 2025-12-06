@@ -36,7 +36,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               ? 'border-red-500 focus:ring-red-500'
               : 'border-primary-200 dark:border-primary-700',
             // Disabled styles
-            'disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100 dark:disabled:bg-gray-900',
+            'disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-primary-100 dark:disabled:bg-primary-900',
             className
           )}
           aria-invalid={error ? 'true' : 'false'}
@@ -53,7 +53,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           </p>
         )}
         {helperText && !error && (
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-sm text-primary-600 dark:text-primary-400">
             {helperText}
           </p>
         )}

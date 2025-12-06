@@ -44,11 +44,11 @@ export function TemplateSelector({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+        <label className="block text-sm font-medium text-foreground">
           Receipt Template / Disenyo ng Resibo
         </label>
         {!isAuthenticated && (
-          <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+          <span className="text-xs text-primary-600 dark:text-primary-400 flex items-center gap-1">
             <Lock className="w-3 h-3" />
             Sign in for premium templates
           </span>
@@ -70,10 +70,10 @@ export function TemplateSelector({
                   'w-full aspect-[3/4] rounded-lg border-2 transition-all overflow-hidden',
                   'flex flex-col',
                   isSelected
-                    ? 'border-green-500 ring-2 ring-green-200 dark:ring-green-800'
+                    ? 'border-primary-500 ring-2 ring-primary-200 dark:ring-primary-800'
                     : canUse
-                    ? 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                    : 'border-gray-200 dark:border-gray-700 opacity-75'
+                    ? 'border-primary-200 dark:border-primary-700 hover:border-primary-300 dark:hover:border-primary-600'
+                    : 'border-primary-200 dark:border-primary-700 opacity-75'
                 )}
                 title={template.name}
               >

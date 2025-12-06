@@ -169,7 +169,7 @@ export function InvoiceForm({
     >
       {/* Receipt Dimension Selector */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+        <label className="block text-sm font-medium text-foreground mb-2">
           Receipt Size / Laki ng Resibo
         </label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -181,12 +181,12 @@ export function InvoiceForm({
               className={cn(
                 'p-3 rounded-lg border text-sm transition-all',
                 selectedDimension === option.value
-                  ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300'
-                  : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                  ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300'
+                  : 'border-primary-200 dark:border-primary-700 hover:border-primary-300 dark:hover:border-primary-600'
               )}
             >
               <div className="font-medium">{option.label}</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">{option.width}px</div>
+              <div className="text-xs text-primary-600 dark:text-primary-400">{option.width}px</div>
             </button>
           ))}
         </div>
@@ -194,7 +194,7 @@ export function InvoiceForm({
 
       {/* Language Toggle */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+        <label className="block text-sm font-medium text-foreground mb-2">
           Receipt Language / Wika ng Resibo
         </label>
         <Controller
@@ -211,8 +211,8 @@ export function InvoiceForm({
                 className={cn(
                   'flex-1 flex items-center justify-center gap-2 p-3 rounded-lg border text-sm transition-all',
                   field.value === 'en'
-                    ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300'
-                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                    ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300'
+                    : 'border-primary-200 dark:border-primary-700 hover:border-primary-300 dark:hover:border-primary-600'
                 )}
               >
                 <Languages className="w-4 h-4" />
@@ -227,8 +227,8 @@ export function InvoiceForm({
                 className={cn(
                   'flex-1 flex items-center justify-center gap-2 p-3 rounded-lg border text-sm transition-all',
                   field.value === 'tl'
-                    ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300'
-                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                    ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300'
+                    : 'border-primary-200 dark:border-primary-700 hover:border-primary-300 dark:hover:border-primary-600'
                 )}
               >
                 <Languages className="w-4 h-4" />
@@ -261,7 +261,7 @@ export function InvoiceForm({
         control={control}
         render={({ field }) => (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+            <label className="block text-sm font-medium text-foreground mb-2">
               Currency / Pera
             </label>
             <div className="flex gap-2">
@@ -277,8 +277,8 @@ export function InvoiceForm({
                   className={cn(
                     'flex-1 p-3 rounded-lg border text-sm transition-all',
                     field.value === option.value
-                      ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                      ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300'
+                      : 'border-primary-200 dark:border-primary-700 hover:border-primary-300 dark:hover:border-primary-600'
                   )}
                 >
                   <div className="font-medium">{option.label}</div>
@@ -292,7 +292,7 @@ export function InvoiceForm({
       {/* Line Items */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+          <label className="block text-sm font-medium text-foreground">
             Items / Mga Produkto
           </label>
           <Button

@@ -17,7 +17,7 @@ export function ThemeToggle() {
     return (
       <Button variant="ghost" size="sm" className="w-10 h-10 p-0">
         <span className="sr-only">Toggle theme</span>
-        <div className="w-5 h-5 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse" />
+        <div className="w-5 h-5 rounded-full bg-primary-200 dark:bg-primary-700 animate-pulse" />
       </Button>
     );
   }
@@ -48,7 +48,7 @@ export function ThemeToggle() {
       ) : (
         // Moon icon
         <svg
-          className="w-5 h-5 text-gray-700"
+          className="w-5 h-5 text-primary-700"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
