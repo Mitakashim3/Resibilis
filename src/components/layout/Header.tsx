@@ -13,7 +13,7 @@ interface HeaderProps {
 
 export function Header({ user }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm">
+    <header className="sticky top-4 z-50 mx-4 rounded-2xl glass-panel transition-all duration-300">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -24,13 +24,13 @@ export function Header({ user }: HeaderProps) {
                 alt="Resibilis Logo"
                 width={40}
                 height={40}
-                className="rounded-full"
+                className="rounded-full ring-2 ring-primary-500/20"
               />
               <div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                <h1 className="text-xl font-bold text-foreground">
                   Resibilis
                 </h1>
-                <p className="text-xs text-gray-500 dark:text-gray-400 -mt-0.5">
+                <p className="text-xs text-primary-600 dark:text-primary-400 -mt-0.5">
                   Lightning-fast receipts
                 </p>
               </div>
@@ -41,7 +41,7 @@ export function Header({ user }: HeaderProps) {
               <nav className="hidden sm:flex items-center gap-1 ml-4">
                 <Link
                   href="/products"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100 hover:bg-primary-100/50 dark:hover:bg-primary-800/50 transition-colors"
                 >
                   <Package className="w-4 h-4" />
                   Products

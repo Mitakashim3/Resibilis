@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Providers } from './providers';
+import { LiquidBackground } from '@/components/ui/LiquidBackground';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -47,8 +48,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#111827' },
+    { media: '(prefers-color-scheme: light)', color: '#f2f2f2' },
+    { media: '(prefers-color-scheme: dark)', color: '#050505' },
   ],
 };
 
@@ -73,7 +74,8 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col" suppressHydrationWarning>
+        <LiquidBackground />
         <Providers>{children}</Providers>
       </body>
     </html>

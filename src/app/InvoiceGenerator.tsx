@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 import { createClient } from '@/lib/supabase';
@@ -180,16 +181,21 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="space-y-6"
+    >
       {/* Premium Banner for Guest Users */}
       {!user && <PremiumPromo variant="banner" />}
 
       {/* Hero Section */}
       <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Create Your <span className="gradient-text">Resibo</span>
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+          Create Your <span className="text-primary-500">Resibo</span>
         </h2>
-        <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+        <p className="text-primary-600 dark:text-primary-400 max-w-md mx-auto">
           Fast, free, and secure. Generate professional receipts in seconds.
         </p>
       </div>
@@ -397,6 +403,6 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

@@ -99,21 +99,24 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
     return (
       <div
         ref={ref}
+        className="receipt-shadow"
         style={{
           // Force white background for printing/export - NEVER dark mode
           backgroundColor: '#FFFFFF',
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'0.05\'/%3E%3C/svg%3E")',
           color: '#000000',
           width: `${width}px`,
           boxSizing: 'border-box',
           padding: '16px',
           fontFamily: "'Courier New', 'Consolas', monospace",
           fontSize: dimension === 'thermal' ? '12px' : dimension === 'compact' ? '13px' : '14px',
+          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
         }}
       >
         {/* Receipt Paper */}
         <div
           style={{
-            backgroundColor: '#FFFFFF',
+            backgroundColor: 'transparent',
             border: '1px solid #e5e7eb',
             borderRadius: '8px',
             padding: '24px',
