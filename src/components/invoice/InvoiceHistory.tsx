@@ -19,6 +19,16 @@ export function InvoiceHistory({ userId }: InvoiceHistoryProps) {
 
   useEffect(() => {
     fetchInvoices();
+
+    // Local, immediate refresh signal (covers cases where Supabase Realtime
+    // is not enabled/configured for this table).
+    const onLocalHistoryUpdated = () => {
+      fetchInvoices();
+    };
+    window.addEventListener(
+      'resibilis:invoice-history-updated',
+      onLocalHistoryUpdated as EventListener
+    );
     
     // Set up real-time subscription
     const channel = supabase
@@ -39,6 +49,10 @@ export function InvoiceHistory({ userId }: InvoiceHistoryProps) {
       .subscribe();
 
     return () => {
+      window.removeEventListener(
+        'resibilis:invoice-history-updated',
+        onLocalHistoryUpdated as EventListener
+      );
       supabase.removeChannel(channel);
     };
   }, [userId]);

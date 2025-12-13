@@ -44,6 +44,11 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
   const captureRef = useRef<HTMLDivElement>(null);
   const supabase = createClient();
 
+  const notifyHistoryUpdated = useCallback(() => {
+    // Local, client-only signal for UI refresh (does not affect security)
+    window.dispatchEvent(new CustomEvent('resibilis:invoice-history-updated'));
+  }, []);
+
   // Handle form data changes from InvoiceForm
   const handleDataChange = useCallback((data: InvoiceFormData) => {
     setFormData(data);
@@ -56,19 +61,28 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
 
   // Save to history helper
   const saveToHistory = async (data: InvoiceFormData) => {
-    if (!user) return;
+    // Only save for authenticated users. We also derive the user id from
+    // Supabase auth to avoid relying on any client-provided prop.
+    const { data: authData } = await supabase.auth.getUser();
+    const authUser = authData?.user;
+    if (!authUser) return;
 
     try {
       const total = calculateTotal(data.items);
       
-      await supabase.from('invoices').insert({
-        user_id: user.id,
+      const { error } = await supabase.from('invoices').insert({
+        user_id: authUser.id,
         customer_name: data.customerName,
         items: JSON.parse(JSON.stringify(data.items)),
         total_amount: total,
         currency: data.currency,
         notes: data.notes || null,
       } as Database['public']['Tables']['invoices']['Insert']);
+
+      if (error) throw error;
+
+      // Immediately refresh the in-page history list.
+      notifyHistoryUpdated();
     } catch (error) {
       console.error('Error auto-saving to history:', error);
     }
@@ -213,6 +227,8 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
       } as Database['public']['Tables']['invoices']['Insert']);
 
       if (error) throw error;
+
+      notifyHistoryUpdated();
       
       // Show success feedback
       alert('Receipt saved successfully!');
