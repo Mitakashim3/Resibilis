@@ -80,7 +80,7 @@ export function AdBanner({ slot, size = 'responsive', className = '' }: AdBanner
   return (
     <div 
       ref={adRef}
-      className={`ad-container w-full overflow-hidden flex justify-center ${isResponsive ? 'min-h-24' : ''} ${className}`}
+      className={`ad-container w-full overflow-hidden flex justify-center ${className}`}
       aria-label="Advertisement"
     >
       <ins

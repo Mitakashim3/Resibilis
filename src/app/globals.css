@@ -66,6 +66,15 @@
   ::-webkit-scrollbar-thumb {
     @apply bg-primary-300 dark:bg-primary-700 rounded hover:bg-primary-400 dark:hover:bg-primary-600;
   }
+
+  /*
+    AdSense sometimes returns "no fill" or gets blocked by extensions.
+    Collapse those slots so we don't leave empty boxes/whitespace.
+  */
+  ins.adsbygoogle[data-ad-status='unfilled'] {
+    display: none !important;
+    height: 0 !important;
+  }
 }
 
 @layer utilities {
