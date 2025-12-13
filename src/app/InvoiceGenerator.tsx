@@ -320,13 +320,13 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
         </div>
       </div>
 
-      {/* Ad Placement - Centered below content (less distracting) */}
+      {/* Optional manual ad unit (can be used alongside Auto Ads). */}
       <div className="flex justify-center">
         <Ad
           slot={ADSENSE_SLOT_MAIN}
           size="responsive"
           className="w-full max-w-2xl"
-          showPlaceholder={true} // Set to false in production
+          showPlaceholder={false}
         />
       </div>
 
