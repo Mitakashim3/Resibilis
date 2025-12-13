@@ -105,8 +105,8 @@ export function PricingContent() {
         <div className="grid md:grid-cols-3 gap-6 -mt-20 mb-12">
           {/* Free Plan */}
           <Card variant="bordered" className="overflow-hidden">
-            <CardHeader className="bg-primary-50 dark:bg-primary-900/20">
-              <CardTitle className="text-lg">Free / Libre</CardTitle>
+            <CardHeader className="bg-primary-50 dark:bg-primary-900/20 rounded-lg px-4 pt-1">
+              <CardTitle className="text-lg ">Free / Libre</CardTitle>
               <p className="text-sm text-primary-600 dark:text-primary-400">Para sa lahat</p>
             </CardHeader>
             <CardContent className="p-6">
@@ -149,7 +149,7 @@ export function PricingContent() {
               <Clock className="w-3 h-3" />
               COMING SOON
             </div>
-            <CardHeader className="bg-green-50 dark:bg-green-900/20 border-b border-green-200 dark:border-green-800">
+            <CardHeader className="bg-green-50 dark:bg-green-900/20 border-b border-green-200 dark:border-green-800 rounded-lg px-4 pt-1">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Crown className="w-5 h-5 text-yellow-500" />
                 Premium Templates
@@ -192,7 +192,7 @@ export function PricingContent() {
 
           {/* Premium Subscription */}
           <Card variant="bordered" className="overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 border-b border-yellow-200 dark:border-yellow-800">
+            <CardHeader className="bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 border-b border-yellow-200 dark:border-yellow-800 rounded-lg px-4 pt-1">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-yellow-500" />
                 Premium Pro

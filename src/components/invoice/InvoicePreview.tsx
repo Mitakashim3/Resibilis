@@ -92,6 +92,69 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
     const total = calculateTotal(data.items);
     const currencySymbol = data.currency === 'PHP' ? '₱' : '$';
     const width = dimensionWidths[dimension];
+
+    const typography = {
+      standard: {
+        base: 14,
+        muted: 12,
+        header: 24,
+        info: 14,
+        itemHeader: 12,
+        itemRow: 14,
+        total: 18,
+        footer: 12,
+        paddingOuter: 16,
+        paddingInner: 24,
+        dividerMargin: 16,
+        qtyCol: 50,
+        amtCol: 80,
+      },
+      compact: {
+        base: 12,
+        muted: 11,
+        header: 20,
+        info: 12,
+        itemHeader: 11,
+        itemRow: 12,
+        total: 16,
+        footer: 11,
+        paddingOuter: 14,
+        paddingInner: 18,
+        dividerMargin: 12,
+        qtyCol: 46,
+        amtCol: 72,
+      },
+      thermal: {
+        base: 11,
+        muted: 10,
+        header: 18,
+        info: 11,
+        itemHeader: 10,
+        itemRow: 11,
+        total: 14,
+        footer: 10,
+        paddingOuter: 12,
+        paddingInner: 16,
+        dividerMargin: 10,
+        qtyCol: 42,
+        amtCol: 68,
+      },
+      a4: {
+        base: 15,
+        muted: 12,
+        header: 26,
+        info: 15,
+        itemHeader: 12,
+        itemRow: 15,
+        total: 20,
+        footer: 12,
+        paddingOuter: 18,
+        paddingInner: 28,
+        dividerMargin: 18,
+        qtyCol: 54,
+        amtCol: 90,
+      },
+    }[dimension];
     
     // Use business name if provided, otherwise default to "RESIBILIS"
     const businessName = data.businessName?.trim() || 'RESIBILIS';
@@ -103,13 +166,12 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
         style={{
           // Force white background for printing/export - NEVER dark mode
           backgroundColor: '#FFFFFF',
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'0.05\'/%3E%3C/svg%3E")',
           color: '#000000',
           width: `${width}px`,
           boxSizing: 'border-box',
-          padding: '16px',
+          padding: `${typography.paddingOuter}px`,
           fontFamily: "'Courier New', 'Consolas', monospace",
-          fontSize: dimension === 'thermal' ? '12px' : dimension === 'compact' ? '13px' : '14px',
+          fontSize: `${typography.base}px`,
           boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
         }}
       >
@@ -119,25 +181,25 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
             backgroundColor: 'transparent',
             border: '1px solid #e5e7eb',
             borderRadius: '8px',
-            padding: '24px',
+            padding: `${typography.paddingInner}px`,
             boxSizing: 'border-box',
             width: '100%',
           }}
         >
           {/* Header */}
-          <div style={{ textAlign: 'center', borderBottom: '2px dashed #d1d5db', paddingBottom: '16px', marginBottom: '16px' }}>
+          <div style={{ textAlign: 'center', borderBottom: '2px dashed #d1d5db', paddingBottom: `${typography.dividerMargin}px`, marginBottom: `${typography.dividerMargin}px` }}>
             <h1
-              style={{ color: '#000000', fontSize: '24px', fontWeight: 'bold', margin: 0, letterSpacing: '-0.5px' }}
+              style={{ color: '#000000', fontSize: `${typography.header}px`, fontWeight: 'bold', margin: 0, letterSpacing: '-0.5px' }}
             >
               {businessName}
             </h1>
-            <p style={{ color: '#6b7280', fontSize: '12px', marginTop: '4px', margin: '4px 0 0 0' }}>
+            <p style={{ color: '#6b7280', fontSize: `${typography.muted}px`, marginTop: '4px', margin: '4px 0 0 0' }}>
               {t.officialReceipt}
             </p>
           </div>
 
           {/* Receipt Info */}
-          <div style={{ fontSize: '14px', marginBottom: '16px' }}>
+          <div style={{ fontSize: `${typography.info}px`, marginBottom: `${typography.dividerMargin}px` }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
               <span style={{ color: '#6b7280' }}>{t.receiptNumber}:</span>
               <span style={{ color: '#000000', fontWeight: 500 }}>
@@ -162,22 +224,22 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
 
           {/* Divider */}
           <div
-            style={{ borderTop: '1px dashed #d1d5db', margin: '16px 0' }}
+            style={{ borderTop: '1px dashed #d1d5db', margin: `${typography.dividerMargin}px 0` }}
           />
 
           {/* Items Header */}
           <div
             style={{ 
               display: 'flex', 
-              fontSize: '12px', 
+              fontSize: `${typography.itemHeader}px`, 
               fontWeight: 600, 
               color: '#6b7280',
               marginBottom: '8px'
             }}
           >
             <span style={{ flex: 1 }}>{t.item}</span>
-            <span style={{ width: '50px', textAlign: 'center' }}>{t.qty}</span>
-            <span style={{ width: '80px', textAlign: 'right' }}>{t.amount}</span>
+            <span style={{ width: `${typography.qtyCol}px`, textAlign: 'center' }}>{t.qty}</span>
+            <span style={{ width: `${typography.amtCol}px`, textAlign: 'right' }}>{t.amount}</span>
           </div>
 
           {/* Items List */}
@@ -191,7 +253,7 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
                   key={item.id || index}
                   style={{ 
                     display: 'flex', 
-                    fontSize: '14px', 
+                    fontSize: `${typography.itemRow}px`, 
                     color: '#000000',
                     marginBottom: '8px'
                   }}
@@ -199,8 +261,8 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
                   <span style={{ flex: 1, paddingRight: '8px', wordBreak: 'break-word' }}>
                     {item.item || `Item ${index + 1}`}
                   </span>
-                  <span style={{ width: '50px', textAlign: 'center' }}>{qty}</span>
-                  <span style={{ width: '80px', textAlign: 'right', fontWeight: 500 }}>
+                  <span style={{ width: `${typography.qtyCol}px`, textAlign: 'center' }}>{qty}</span>
+                  <span style={{ width: `${typography.amtCol}px`, textAlign: 'right', fontWeight: 500 }}>
                     {currencySymbol}{lineTotal.toFixed(2)}
                   </span>
                 </div>
@@ -210,11 +272,11 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
 
           {/* Divider */}
           <div
-            style={{ borderTop: '1px dashed #d1d5db', margin: '16px 0' }}
+            style={{ borderTop: '1px dashed #d1d5db', margin: `${typography.dividerMargin}px 0` }}
           />
 
           {/* Total */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '18px', fontWeight: 'bold' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: `${typography.total}px`, fontWeight: 'bold' }}>
             <span style={{ color: '#000000' }}>{t.total}</span>
             <span style={{ color: '#000000' }}>
               {formatCurrency(total, data.currency)}
@@ -225,9 +287,9 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
           {data.notes && (
             <>
               <div
-                style={{ borderTop: '1px dashed #d1d5db', margin: '16px 0' }}
+                style={{ borderTop: '1px dashed #d1d5db', margin: `${typography.dividerMargin}px 0` }}
               />
-              <div style={{ fontSize: '14px' }}>
+              <div style={{ fontSize: `${typography.itemRow}px` }}>
                 <p style={{ color: '#6b7280', fontWeight: 500, marginBottom: '4px', margin: '0 0 4px 0' }}>
                   {t.notes}:
                 </p>
@@ -242,7 +304,7 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
 
           {/* Footer */}
           <div
-            style={{ borderTop: '1px dashed #d1d5db', marginTop: '16px', paddingTop: '16px', textAlign: 'center', fontSize: '12px', color: '#9ca3af' }}
+            style={{ borderTop: '1px dashed #d1d5db', marginTop: `${typography.dividerMargin}px`, paddingTop: `${typography.dividerMargin}px`, textAlign: 'center', fontSize: `${typography.footer}px`, color: '#9ca3af' }}
           >
             <p style={{ margin: 0 }}>{t.thankYou}</p>
             <p style={{ margin: '8px 0 0 0' }}>{t.generatedBy}</p>

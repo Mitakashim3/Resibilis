@@ -153,12 +153,28 @@ export function Ad({
   className = '',
   showPlaceholder = true 
 }: AdBannerProps & { showPlaceholder?: boolean }) {
-  const hasValidSlot = !!slot && slot !== 'YOUR_AD_SLOT_ID';
+  const warned = useRef(false);
+  const normalizedSlot = (slot ?? '').trim();
+  const hasValidSlot =
+    normalizedSlot !== '' && normalizedSlot !== 'YOUR_AD_SLOT_ID' && /^\d+$/.test(normalizedSlot);
+
+  useEffect(() => {
+    if (!ADS_ENABLED) return;
+    if (hasValidSlot) return;
+    if (warned.current) return;
+    warned.current = true;
+
+    // This shows up in production console and is the most common reason ads never render.
+    console.warn(
+      '[AdSense] Ads enabled but slot is missing/invalid. Set NEXT_PUBLIC_ADSENSE_SLOT_MAIN to your numeric AdSense ad unit slot id. Current slot value:',
+      slot
+    );
+  }, [hasValidSlot, slot]);
 
   // In dev (or when slot isn't configured), show a placeholder instead of throwing AdSense errors.
   if (!ADS_ENABLED || !hasValidSlot) {
     return showPlaceholder ? <AdPlaceholder size={size} className={className} /> : null;
   }
 
-  return <AdBanner slot={slot} size={size} className={className} />;
+  return <AdBanner slot={normalizedSlot} size={size} className={className} />;
 }

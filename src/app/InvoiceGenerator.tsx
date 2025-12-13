@@ -35,13 +35,13 @@ interface InvoiceGeneratorProps {
  * 4. On save (authenticated): Data is sent to Supabase with RLS protection
  */
 export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
-  const ADSENSE_SLOT_MAIN = process.env.NEXT_PUBLIC_ADSENSE_SLOT_MAIN ?? 'YOUR_AD_SLOT_ID';
+  const ADSENSE_SLOT_MAIN = process.env.NEXT_PUBLIC_ADSENSE_SLOT_MAIN ?? '';
 
   const [formData, setFormData] = useState<InvoiceFormData>(defaultInvoiceValues);
   const [isSaving, setIsSaving] = useState(false);
   const [showMobilePreview, setShowMobilePreview] = useState(false);
   const [dimension, setDimension] = useState<ReceiptDimension>('standard');
-  const previewRef = useRef<HTMLDivElement>(null);
+  const captureRef = useRef<HTMLDivElement>(null);
   const supabase = createClient();
 
   // Handle form data changes from InvoiceForm
@@ -77,11 +77,11 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
   // Download as PNG - Client-side only (Scenario A: Guest User)
   // Also saves to history if authenticated
   const handleDownload = async () => {
-    if (!previewRef.current) return;
+    if (!captureRef.current) return;
 
     try {
       // Get the actual dimensions of the element
-      const element = previewRef.current;
+      const element = captureRef.current;
       const width = element.offsetWidth;
       const height = element.offsetHeight;
 
@@ -101,7 +101,16 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
       const invoiceNum = generateInvoiceNumber();
       link.download = `resibo-${invoiceNum}.png`;
       link.href = dataUrl;
+
+      // Safari/iOS can be picky; append then click for best compatibility.
+      document.body.appendChild(link);
       link.click();
+      link.remove();
+
+      // Fallback for environments where the download attribute is ignored.
+      if (typeof link.download === 'undefined') {
+        window.open(dataUrl, '_blank', 'noopener,noreferrer');
+      }
 
       // Auto-save to history if authenticated
       if (user) {
@@ -115,27 +124,33 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
 
   // Download as PDF
   const handleDownloadPDF = async () => {
-    if (!previewRef.current) return;
+    if (!captureRef.current) return;
 
     try {
-      const dataUrl = await toPng(previewRef.current, {
+      const element = captureRef.current;
+      const width = element.offsetWidth;
+      const height = element.offsetHeight;
+
+      const dataUrl = await toPng(element, {
         quality: 1,
         pixelRatio: 2,
         backgroundColor: '#ffffff',
         skipFonts: true,
         cacheBust: true,
+        width,
+        height,
       });
 
       const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'mm',
-        format: 'a5',
+        format: dimension === 'a4' ? 'a4' : 'a5',
       });
 
       // Add image to PDF with proper scaling
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const imgWidth = pdfWidth - 20; // 10mm margins on each side
-      const imgHeight = (previewRef.current.offsetHeight / previewRef.current.offsetWidth) * imgWidth;
+      const imgHeight = (height / width) * imgWidth;
       pdf.addImage(dataUrl, 'PNG', 10, 10, imgWidth, imgHeight);
       pdf.save(`resibo-${generateInvoiceNumber()}.pdf`);
 
@@ -297,7 +312,7 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
               </CardHeader>
               <CardContent className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 overflow-visible">
                 <div className="overflow-x-auto">
-                  <InvoicePreview ref={previewRef} data={formData} dimension={dimension} />
+                  <InvoicePreview data={formData} dimension={dimension} />
                 </div>
               </CardContent>
             </Card>
@@ -377,7 +392,7 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
             {/* Modal Content */}
             <div className="flex-1 overflow-auto p-4 bg-primary-50 dark:bg-primary-900/20">
               <div className="overflow-x-auto">
-                <InvoicePreview ref={previewRef} data={formData} dimension={dimension} />
+                <InvoicePreview data={formData} dimension={dimension} />
               </div>
             </div>
 
@@ -407,6 +422,14 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
           </div>
         </div>
       )}
+
+      {/* Offscreen capture target for PNG/PDF exports (always mounted) */}
+      <div
+        aria-hidden="true"
+        style={{ position: 'fixed', left: '-100000px', top: 0, zIndex: -1 }}
+      >
+        <InvoicePreview ref={captureRef} data={formData} dimension={dimension} />
+      </div>
     </motion.div>
   );
 }
