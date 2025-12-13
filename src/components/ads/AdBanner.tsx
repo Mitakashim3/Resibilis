@@ -31,12 +31,11 @@ export function AdBanner({ slot, size = 'responsive', className = '' }: AdBanner
     if (!ADS_ENABLED || isLoaded.current) return;
 
     try {
-      // Push ad to AdSense
-      const adsbygoogle = (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle;
-      if (adsbygoogle) {
-        adsbygoogle.push({});
-        isLoaded.current = true;
-      }
+      // Queue ad rendering; AdSense script will process pushes when ready
+      const win = window as unknown as { adsbygoogle?: unknown[] };
+      win.adsbygoogle = win.adsbygoogle || [];
+      win.adsbygoogle.push({});
+      isLoaded.current = true;
     } catch (error) {
       console.error('AdSense error:', error);
     }
@@ -53,7 +52,7 @@ export function AdBanner({ slot, size = 'responsive', className = '' }: AdBanner
   return (
     <div 
       ref={adRef}
-      className={`ad-container overflow-hidden ${className}`}
+      className={`ad-container w-full overflow-hidden flex justify-center ${isResponsive ? 'min-h-24' : ''} ${className}`}
       aria-label="Advertisement"
     >
       <ins

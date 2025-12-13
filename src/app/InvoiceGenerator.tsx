@@ -185,7 +185,7 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6"
+      className="space-y-6 pb-24"
     >
       {/* Premium Banner for Guest Users */}
       {!user && <PremiumPromo variant="banner" />}
@@ -240,14 +240,6 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
 
           {/* History for Authenticated Users */}
           {user && <InvoiceHistory userId={user.id} />}
-
-          {/* Ad Placement - Below Form/History */}
-          <Ad 
-            slot="YOUR_AD_SLOT_ID" 
-            size="rectangle" 
-            className="mx-auto"
-            showPlaceholder={true} // Set to false in production
-          />
         </div>
 
         {/* Right Column: Preview (Desktop) */}
@@ -309,6 +301,16 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
             </Card>
           </div>
         </div>
+      </div>
+
+      {/* Ad Placement - Centered below content (less distracting) */}
+      <div className="flex justify-center">
+        <Ad
+          slot="YOUR_AD_SLOT_ID"
+          size="responsive"
+          className="w-full max-w-2xl"
+          showPlaceholder={true} // Set to false in production
+        />
       </div>
 
       {/* Mobile Preview Button (Sticky) */}
