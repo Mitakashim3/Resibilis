@@ -77,7 +77,7 @@ export function PricingContent() {
   const [selectedPlan, setSelectedPlan] = useState<'free' | 'templates' | 'premium'>('templates');
 
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <main className="min-h-screen">
       {/* Header */}
       <div className="bg-gradient-to-b from-green-600 to-emerald-700 text-white py-16 px-4">
         <div className="max-w-5xl mx-auto">
@@ -104,15 +104,15 @@ export function PricingContent() {
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-6 -mt-20 mb-12">
           {/* Free Plan */}
-          <Card variant="bordered" className="bg-white dark:bg-gray-800 overflow-hidden">
-            <CardHeader className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+          <Card variant="bordered" className="overflow-hidden">
+            <CardHeader className="bg-primary-50 dark:bg-primary-900/20">
               <CardTitle className="text-lg">Free / Libre</CardTitle>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Para sa lahat</p>
+              <p className="text-sm text-primary-600 dark:text-primary-400">Para sa lahat</p>
             </CardHeader>
             <CardContent className="p-6">
               <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900 dark:text-white">₱0</span>
-                <span className="text-gray-500 dark:text-gray-400">/forever</span>
+                <span className="text-4xl font-bold text-foreground">₱0</span>
+                <span className="text-primary-600 dark:text-primary-400">/forever</span>
               </div>
               
               <ul className="space-y-3 mb-6">
@@ -126,7 +126,7 @@ export function PricingContent() {
                       <span className="w-4 h-4 text-gray-300 mt-0.5 flex-shrink-0">—</span>
                     )}
                     <span className={cn(
-                      item.included ? 'text-gray-700 dark:text-gray-300' : 'text-gray-400 dark:text-gray-500'
+                      item.included ? 'text-primary-700 dark:text-primary-300' : 'text-primary-600/70 dark:text-primary-400/70'
                     )}>
                       {item.feature}
                       {item.requiresAuth && <span className="text-xs text-yellow-600 ml-1">(sign in)</span>}
@@ -144,7 +144,7 @@ export function PricingContent() {
           </Card>
 
           {/* Individual Templates */}
-          <Card variant="bordered" className="bg-white dark:bg-gray-800 overflow-hidden border-green-500 ring-2 ring-green-200 dark:ring-green-800 relative">
+          <Card variant="bordered" className="overflow-hidden border-green-500 ring-2 ring-green-200 dark:ring-green-800 relative">
             <div className="absolute top-0 right-0 bg-amber-500 text-white text-xs px-3 py-1 rounded-bl-lg font-medium flex items-center gap-1">
               <Clock className="w-3 h-3" />
               COMING SOON
@@ -154,32 +154,32 @@ export function PricingContent() {
                 <Crown className="w-5 h-5 text-yellow-500" />
                 Premium Templates
               </CardTitle>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Buy what you need</p>
+              <p className="text-sm text-primary-600 dark:text-primary-400">Buy what you need</p>
             </CardHeader>
             <CardContent className="p-6">
               <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900 dark:text-white">₱50</span>
-                <span className="text-gray-500 dark:text-gray-400">-₱100/template</span>
+                <span className="text-4xl font-bold text-foreground">₱50</span>
+                <span className="text-primary-600 dark:text-primary-400">-₱100/template</span>
               </div>
               
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-2 text-sm">
                   <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700 dark:text-gray-300">
+                  <span className="text-primary-700 dark:text-primary-300">
                     <strong>7 premium templates</strong> to choose from
                   </span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700 dark:text-gray-300">One-time payment, use forever</span>
+                  <span className="text-primary-700 dark:text-primary-300">One-time payment, use forever</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700 dark:text-gray-300">Professional designs for your brand</span>
+                  <span className="text-primary-700 dark:text-primary-300">Professional designs for your brand</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700 dark:text-gray-300">All free features included</span>
+                  <span className="text-primary-700 dark:text-primary-300">All free features included</span>
                 </li>
               </ul>
 
@@ -191,25 +191,25 @@ export function PricingContent() {
           </Card>
 
           {/* Premium Subscription */}
-          <Card variant="bordered" className="bg-white dark:bg-gray-800 overflow-hidden">
+          <Card variant="bordered" className="overflow-hidden">
             <CardHeader className="bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 border-b border-yellow-200 dark:border-yellow-800">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-yellow-500" />
                 Premium Pro
               </CardTitle>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Unlock everything</p>
+              <p className="text-sm text-primary-600 dark:text-primary-400">Unlock everything</p>
             </CardHeader>
             <CardContent className="p-6">
               <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900 dark:text-white">₱299</span>
-                <span className="text-gray-500 dark:text-gray-400">/month</span>
+                <span className="text-4xl font-bold text-foreground">₱299</span>
+                <span className="text-primary-600 dark:text-primary-400">/month</span>
               </div>
               
               <ul className="space-y-3 mb-6">
                 {planFeatures.premium.slice(0, 7).map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm">
                     <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700 dark:text-gray-300">{item.feature}</span>
+                    <span className="text-primary-700 dark:text-primary-300">{item.feature}</span>
                   </li>
                 ))}
               </ul>

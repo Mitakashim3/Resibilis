@@ -2,11 +2,13 @@
 
 import { useEffect, useRef } from 'react';
 
-// Set to true when you have your AdSense account approved
-const ADS_ENABLED = true;
+// Only load real AdSense ads in production builds.
+// (AdSense typically won't serve on localhost and can throw errors in dev.)
+const ADS_ENABLED = process.env.NODE_ENV === 'production';
 
-// Replace with your actual AdSense publisher ID (format: ca-pub-XXXXXXXXXXXXXXXX)
-const ADSENSE_PUBLISHER_ID = 'ca-pub-8782757148864843';
+// Prefer env var, fallback to current ID
+const ADSENSE_PUBLISHER_ID =
+  process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID ?? 'ca-pub-8782757148864843';
 
 type AdSize = 'banner' | 'rectangle' | 'leaderboard' | 'responsive';
 
@@ -30,15 +32,41 @@ export function AdBanner({ slot, size = 'responsive', className = '' }: AdBanner
   useEffect(() => {
     if (!ADS_ENABLED || isLoaded.current) return;
 
-    try {
-      // Queue ad rendering; AdSense script will process pushes when ready
-      const win = window as unknown as { adsbygoogle?: unknown[] };
-      win.adsbygoogle = win.adsbygoogle || [];
-      win.adsbygoogle.push({});
-      isLoaded.current = true;
-    } catch (error) {
-      console.error('AdSense error:', error);
-    }
+    let cancelled = false;
+    let attempts = 0;
+    const maxAttempts = 30;
+
+    const tryLoad = () => {
+      if (cancelled || isLoaded.current) return;
+
+      const containerWidth = adRef.current?.getBoundingClientRect().width ?? 0;
+
+      // Prevent: "No slot size for availableWidth=0"
+      if (containerWidth < 50) {
+        attempts += 1;
+        if (attempts <= maxAttempts) {
+          requestAnimationFrame(tryLoad);
+        }
+        return;
+      }
+
+      try {
+        // Queue ad rendering; AdSense script will process pushes when ready
+        const win = window as unknown as { adsbygoogle?: unknown[] };
+        win.adsbygoogle = win.adsbygoogle || [];
+        win.adsbygoogle.push({});
+        isLoaded.current = true;
+      } catch (error) {
+        console.error('AdSense error:', error);
+      }
+    };
+
+    // Wait at least one frame so layout has a measurable width
+    requestAnimationFrame(tryLoad);
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   // Don't render anything if ads are disabled
@@ -60,7 +88,7 @@ export function AdBanner({ slot, size = 'responsive', className = '' }: AdBanner
         style={{
           display: 'block',
           ...(isResponsive
-            ? {}
+            ? { width: '100%' }
             : {
                 width: `${sizeConfig.width}px`,
                 height: `${sizeConfig.height}px`,
@@ -125,7 +153,10 @@ export function Ad({
   className = '',
   showPlaceholder = true 
 }: AdBannerProps & { showPlaceholder?: boolean }) {
-  if (!ADS_ENABLED) {
+  const hasValidSlot = !!slot && slot !== 'YOUR_AD_SLOT_ID';
+
+  // In dev (or when slot isn't configured), show a placeholder instead of throwing AdSense errors.
+  if (!ADS_ENABLED || !hasValidSlot) {
     return showPlaceholder ? <AdPlaceholder size={size} className={className} /> : null;
   }
 

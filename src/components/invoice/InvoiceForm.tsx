@@ -491,7 +491,7 @@ export function InvoiceForm({
       </div>
 
       {!isAuthenticated && (
-        <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+        <p className="text-sm text-primary-600 dark:text-primary-400 text-center">
           Sign in to save receipts to your history
         </p>
       )}
@@ -503,11 +503,11 @@ export function InvoiceForm({
         title="Download Receipt"
       >
         <div className="space-y-4">
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-primary-700 dark:text-primary-300">
             Your receipt will be downloaded as a PNG image.
           </p>
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 text-sm">
-            <p className="text-gray-500 dark:text-gray-400">
+          <div className="rounded-lg p-3 text-sm bg-primary-50 dark:bg-primary-900/20 border border-primary-200/50 dark:border-primary-700/30">
+            <p className="text-primary-700 dark:text-primary-300">
               <strong>Size:</strong> {dimensionOptions.find(d => d.value === selectedDimension)?.description}
             </p>
           </div>
@@ -534,7 +534,7 @@ export function InvoiceForm({
         title="Save to History"
       >
         <div className="space-y-4">
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-primary-700 dark:text-primary-300">
             This receipt will be saved to your history. You can view, edit, or download it later.
           </p>
           <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 text-sm text-green-700 dark:text-green-300">

@@ -145,7 +145,7 @@ export function InvoiceHistory({ userId }: InvoiceHistoryProps) {
       </CardHeader>
       <CardContent>
         {invoices.length === 0 ? (
-          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+          <div className="text-center py-8 text-primary-600 dark:text-primary-400">
             <svg
               className="w-12 h-12 mx-auto mb-4 opacity-50"
               fill="none"
@@ -177,20 +177,20 @@ export function InvoiceHistory({ userId }: InvoiceHistoryProps) {
               return (
                 <div
                   key={invoice.id}
-                  className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                  className="p-4 rounded-lg border border-primary-200/40 dark:border-primary-700/40 hover:bg-primary-50/60 dark:hover:bg-primary-900/20 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-medium text-gray-900 dark:text-white truncate">
+                      <h4 className="font-medium text-foreground truncate">
                         {invoice.customer_name}
                       </h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-primary-600 dark:text-primary-400">
                         {formatDate(invoice.created_at)} • {itemCount} item
                         {itemCount !== 1 ? 's' : ''}
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-gray-900 dark:text-white whitespace-nowrap">
+                      <span className="font-semibold text-foreground whitespace-nowrap">
                         {formatCurrency(
                           invoice.total_amount,
                           invoice.currency as 'PHP' | 'USD'

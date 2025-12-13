@@ -35,6 +35,8 @@ interface InvoiceGeneratorProps {
  * 4. On save (authenticated): Data is sent to Supabase with RLS protection
  */
 export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
+  const ADSENSE_SLOT_MAIN = process.env.NEXT_PUBLIC_ADSENSE_SLOT_MAIN ?? 'YOUR_AD_SLOT_ID';
+
   const [formData, setFormData] = useState<InvoiceFormData>(defaultInvoiceValues);
   const [isSaving, setIsSaving] = useState(false);
   const [showMobilePreview, setShowMobilePreview] = useState(false);
@@ -306,7 +308,7 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
       {/* Ad Placement - Centered below content (less distracting) */}
       <div className="flex justify-center">
         <Ad
-          slot="YOUR_AD_SLOT_ID"
+          slot={ADSENSE_SLOT_MAIN}
           size="responsive"
           className="w-full max-w-2xl"
           showPlaceholder={true} // Set to false in production
@@ -345,16 +347,16 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
 
       {/* Mobile Preview Modal */}
       {showMobilePreview && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-gray-900/50 backdrop-blur-sm">
-          <div className="fixed inset-x-4 top-4 bottom-4 bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden flex flex-col">
+        <div className="lg:hidden fixed inset-0 z-50 bg-black/60 dark:bg-black/70 backdrop-blur-sm">
+          <div className="fixed inset-x-4 top-4 bottom-4 bg-paper text-paper-foreground rounded-2xl shadow-xl overflow-hidden flex flex-col border border-primary-200/40 dark:border-primary-700/40">
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="font-semibold text-gray-900 dark:text-white">
+            <div className="flex items-center justify-between p-4 border-b border-primary-200/40 dark:border-primary-700/40">
+              <h3 className="font-semibold text-foreground">
                 Receipt Preview
               </h3>
               <button
                 onClick={() => setShowMobilePreview(false)}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                className="p-2 rounded-lg text-primary-700 dark:text-primary-300 hover:bg-primary-100/60 dark:hover:bg-primary-800/40"
               >
                 <svg
                   className="w-5 h-5"
@@ -373,14 +375,14 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
             </div>
 
             {/* Modal Content */}
-            <div className="flex-1 overflow-auto p-4 bg-gray-100 dark:bg-gray-900">
+            <div className="flex-1 overflow-auto p-4 bg-primary-50 dark:bg-primary-900/20">
               <div className="overflow-x-auto">
                 <InvoicePreview ref={previewRef} data={formData} dimension={dimension} />
               </div>
             </div>
 
             {/* Modal Actions */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
+            <div className="p-4 border-t border-primary-200/40 dark:border-primary-700/40 space-y-2">
               <Button
                 variant="primary"
                 onClick={() => {

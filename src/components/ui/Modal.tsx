@@ -56,14 +56,14 @@ export function Modal({
   return createPortal(
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 dark:bg-black/70 backdrop-blur-sm"
       onClick={(e) => {
         if (e.target === overlayRef.current) onClose();
       }}
     >
       <div
         className={cn(
-          'w-full glass-panel rounded-2xl shadow-2xl',
+          'w-full bg-paper text-paper-foreground rounded-2xl shadow-2xl border border-primary-200/40 dark:border-primary-700/40',
           'transform transition-all animate-in fade-in zoom-in-95 duration-200',
           sizes[size]
         )}
@@ -72,7 +72,7 @@ export function Modal({
         aria-labelledby="modal-title"
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-primary-200/30 dark:border-primary-700/30">
+        <div className="flex items-center justify-between p-4 border-b border-primary-200/40 dark:border-primary-700/40">
           <h2
             id="modal-title"
             className="text-lg font-semibold text-foreground"
@@ -81,7 +81,7 @@ export function Modal({
           </h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-primary-100/50 dark:hover:bg-primary-800/50 rounded-lg transition-colors text-primary-600 dark:text-primary-400"
+            className="p-2 rounded-lg transition-colors text-primary-700 dark:text-primary-300 hover:bg-primary-100/60 dark:hover:bg-primary-800/40"
             aria-label="Close modal"
           >
             <svg
@@ -101,11 +101,11 @@ export function Modal({
         </div>
 
         {/* Content */}
-        <div className="p-4 text-foreground">{children}</div>
+  <div className="p-4 text-paper-foreground">{children}</div>
 
         {/* Footer */}
         {footer && (
-          <div className="flex justify-end gap-3 p-4 border-t border-primary-200/30 dark:border-primary-700/30">
+          <div className="flex justify-end gap-3 p-4 border-t border-primary-200/40 dark:border-primary-700/40">
             {footer}
           </div>
         )}
@@ -158,7 +158,7 @@ export function ConfirmModal({
         </>
       }
     >
-      <p className="text-gray-600 dark:text-gray-300">{message}</p>
+      <p className="text-primary-700 dark:text-primary-300">{message}</p>
     </Modal>
   );
 }

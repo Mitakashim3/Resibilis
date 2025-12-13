@@ -9,6 +9,7 @@ import { Button, Input, Modal } from '@/components/ui';
 import { Trash2, Edit2, Plus, Package, Wrench } from 'lucide-react';
 import DOMPurify from 'dompurify';
 import type { Database } from '@/types/database';
+import { cn } from '@/lib/utils';
 
 type ProductRow = Database['public']['Tables']['products_services']['Row'];
 
@@ -209,7 +210,7 @@ export function ProductCatalog({ onSelectProduct, selectionMode = false }: Produ
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value as 'all' | 'product' | 'service')}
-            className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm"
+            className="rounded-lg border border-primary-200/60 dark:border-primary-700/40 bg-paper text-paper-foreground px-3 py-2 text-sm"
           >
             <option value="all">All Items</option>
             <option value="product">Products Only</option>
@@ -232,7 +233,7 @@ export function ProductCatalog({ onSelectProduct, selectionMode = false }: Produ
       )}
 
       {filteredProducts.length === 0 ? (
-        <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+        <div className="text-center py-8 text-primary-600 dark:text-primary-400">
           <Package className="w-12 h-12 mx-auto mb-3 opacity-50" />
           <p>No items yet. Add your first product or service!</p>
         </div>
@@ -241,9 +242,12 @@ export function ProductCatalog({ onSelectProduct, selectionMode = false }: Produ
           {filteredProducts.map((product) => (
             <div
               key={product.id}
-              className={`flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 ${
-                selectionMode ? 'cursor-pointer hover:border-green-500 transition-colors' : ''
-              }`}
+              className={cn(
+                'flex items-center justify-between p-4 rounded-lg glass-panel border border-primary-200/30 dark:border-primary-700/30',
+                selectionMode
+                  ? 'cursor-pointer hover:border-primary-500/60 transition-colors'
+                  : ''
+              )}
               onClick={() => selectionMode && onSelectProduct?.(product)}
             >
               <div className="flex items-center gap-3">
@@ -259,11 +263,11 @@ export function ProductCatalog({ onSelectProduct, selectionMode = false }: Produ
                   )}
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-white">{product.name}</p>
+                  <p className="font-medium text-foreground">{product.name}</p>
                   {product.description && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{product.description}</p>
+                    <p className="text-sm text-primary-600 dark:text-primary-400">{product.description}</p>
                   )}
-                  <div className="flex items-center gap-2 mt-1 text-xs text-gray-400">
+                  <div className="flex items-center gap-2 mt-1 text-xs text-primary-600/80 dark:text-primary-400/80">
                     <span className="capitalize">{product.type}</span>
                     {product.default_price && (
                       <>
@@ -279,7 +283,7 @@ export function ProductCatalog({ onSelectProduct, selectionMode = false }: Produ
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => openEditModal(product)}
-                    className="p-2 text-gray-400 hover:text-blue-500 transition-colors"
+                    className="p-2 text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 transition-colors"
                     title="Edit"
                   >
                     <Edit2 className="w-4 h-4" />
@@ -289,7 +293,7 @@ export function ProductCatalog({ onSelectProduct, selectionMode = false }: Produ
                       setDeletingProduct(product);
                       setShowDeleteModal(true);
                     }}
-                    className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                    className="p-2 text-primary-600 dark:text-primary-400 hover:text-red-500 transition-colors"
                     title="Delete"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -309,12 +313,12 @@ export function ProductCatalog({ onSelectProduct, selectionMode = false }: Produ
       >
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-primary-700 dark:text-primary-300 mb-1">
               Type
             </label>
             <select
               {...register('type')}
-              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2"
+              className="w-full rounded-lg border border-primary-200/60 dark:border-primary-700/40 bg-paper text-paper-foreground px-3 py-2"
             >
               <option value="product">Product</option>
               <option value="service">Service</option>
@@ -329,13 +333,13 @@ export function ProductCatalog({ onSelectProduct, selectionMode = false }: Produ
           />
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-primary-700 dark:text-primary-300 mb-1">
               Description (optional)
             </label>
             <textarea
               {...register('description')}
               rows={2}
-              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm"
+              className="w-full rounded-lg border border-primary-200/60 dark:border-primary-700/40 bg-paper text-paper-foreground px-3 py-2 text-sm"
               placeholder="Brief description of the item"
             />
             {errors.description && (
@@ -380,7 +384,7 @@ export function ProductCatalog({ onSelectProduct, selectionMode = false }: Produ
         }}
         title="Delete Item"
       >
-        <p className="text-gray-600 dark:text-gray-400 mb-6">
+        <p className="text-primary-700 dark:text-primary-300 mb-6">
           Are you sure you want to delete &quot;{deletingProduct?.name}&quot;? This action cannot be undone.
         </p>
         <div className="flex justify-end gap-3">
@@ -394,9 +398,8 @@ export function ProductCatalog({ onSelectProduct, selectionMode = false }: Produ
             Cancel
           </Button>
           <Button
-            variant="primary"
+            variant="danger"
             onClick={handleDelete}
-            className="bg-red-600 hover:bg-red-700"
           >
             Delete
           </Button>

@@ -22,10 +22,10 @@ export default async function HowToUsePage() {
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               How to Use <span className="text-primary-500">Resibilis</span>
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
+            <p className="text-lg text-primary-700 dark:text-primary-300">
               Create professional receipts in 4 simple steps
             </p>
           </div>
@@ -33,21 +33,21 @@ export default async function HowToUsePage() {
           {/* Steps */}
           <div className="space-y-8 mb-12">
             {/* Step 1 */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 md:p-8 border border-gray-200 dark:border-gray-700">
+            <div className="glass-panel rounded-xl p-6 md:p-8 border border-primary-200/30 dark:border-primary-700/30">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
                   1
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h2 className="text-xl font-bold text-foreground mb-2">
                     Enter Customer Information
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  <p className="text-primary-700 dark:text-primary-300 mb-4">
                     Start by entering the customer&apos;s name. This will appear at the top of the 
                     receipt. You can also customize your business name if you have an account.
                   </p>
-                  <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-4 border border-primary-200/50 dark:border-primary-700/30">
+                    <p className="text-sm text-primary-700 dark:text-primary-300">
                       <strong>Tip:</strong> If you frequently serve the same customers, create 
                       an account to save your receipt history for easy reference.
                     </p>
@@ -57,21 +57,21 @@ export default async function HowToUsePage() {
             </div>
 
             {/* Step 2 */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 md:p-8 border border-gray-200 dark:border-gray-700">
+            <div className="glass-panel rounded-xl p-6 md:p-8 border border-primary-200/30 dark:border-primary-700/30">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
                   2
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h2 className="text-xl font-bold text-foreground mb-2">
                     Add Your Items
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  <p className="text-primary-700 dark:text-primary-300 mb-4">
                     Click &quot;Add Item&quot; to add products or services to your receipt. For each item, 
                     enter the name, quantity, and price. The total will be calculated automatically.
                   </p>
-                  <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-4 border border-primary-200/50 dark:border-primary-700/30">
+                    <p className="text-sm text-primary-700 dark:text-primary-300">
                       <strong>Pro Feature:</strong> With an account, you can save frequently 
                       used items to your Product Catalog for quick selection.
                     </p>
@@ -81,19 +81,19 @@ export default async function HowToUsePage() {
             </div>
 
             {/* Step 3 */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 md:p-8 border border-gray-200 dark:border-gray-700">
+            <div className="glass-panel rounded-xl p-6 md:p-8 border border-primary-200/30 dark:border-primary-700/30">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
                   3
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h2 className="text-xl font-bold text-foreground mb-2">
                     Customize Your Receipt
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  <p className="text-primary-700 dark:text-primary-300 mb-4">
                     Choose your preferred settings:
                   </p>
-                  <ul className="space-y-2 text-gray-600 dark:text-gray-400 mb-4">
+                  <ul className="space-y-2 text-primary-700 dark:text-primary-300 mb-4">
                     <li className="flex items-center gap-2">
                       <span className="text-primary-500">•</span>
                       <strong>Currency:</strong> PHP (₱), USD ($), or EUR (€)
@@ -111,8 +111,8 @@ export default async function HowToUsePage() {
                       <strong>Notes:</strong> Add any additional information
                     </li>
                   </ul>
-                  <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-4 border border-primary-200/50 dark:border-primary-700/30">
+                    <p className="text-sm text-primary-700 dark:text-primary-300">
                       <strong>Tip:</strong> Use the live preview on the right to see exactly 
                       how your receipt will look before downloading.
                     </p>
@@ -122,19 +122,19 @@ export default async function HowToUsePage() {
             </div>
 
             {/* Step 4 */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 md:p-8 border border-gray-200 dark:border-gray-700">
+            <div className="glass-panel rounded-xl p-6 md:p-8 border border-primary-200/30 dark:border-primary-700/30">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
                   4
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h2 className="text-xl font-bold text-foreground mb-2">
                     Download or Save
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  <p className="text-primary-700 dark:text-primary-300 mb-4">
                     When you&apos;re satisfied with your receipt, you have several options:
                   </p>
-                  <ul className="space-y-2 text-gray-600 dark:text-gray-400 mb-4">
+                  <ul className="space-y-2 text-primary-700 dark:text-primary-300 mb-4">
                     <li className="flex items-center gap-2">
                       <span className="text-green-500">✓</span>
                       <strong>Download PNG:</strong> High-quality image file, perfect for 
@@ -158,58 +158,58 @@ export default async function HowToUsePage() {
 
           {/* FAQ Section */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-foreground mb-6">
               Frequently Asked Questions
             </h2>
             <div className="space-y-4">
-              <details className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <summary className="px-6 py-4 cursor-pointer font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50">
+              <details className="glass-panel rounded-xl border border-primary-200/30 dark:border-primary-700/30 overflow-hidden">
+                <summary className="px-6 py-4 cursor-pointer font-semibold text-foreground hover:bg-primary-100/40 dark:hover:bg-primary-800/30">
                   Is Resibilis really free?
                 </summary>
-                <div className="px-6 pb-4 text-gray-600 dark:text-gray-400">
+                <div className="px-6 pb-4 text-primary-700 dark:text-primary-300">
                   Yes! Resibilis is completely free to use. You can create unlimited receipts 
                   without any charges. We may introduce optional premium features in the future, 
                   but the core receipt generation will always be free.
                 </div>
               </details>
 
-              <details className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <summary className="px-6 py-4 cursor-pointer font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50">
+              <details className="glass-panel rounded-xl border border-primary-200/30 dark:border-primary-700/30 overflow-hidden">
+                <summary className="px-6 py-4 cursor-pointer font-semibold text-foreground hover:bg-primary-100/40 dark:hover:bg-primary-800/30">
                   Do I need to create an account?
                 </summary>
-                <div className="px-6 pb-4 text-gray-600 dark:text-gray-400">
+                <div className="px-6 pb-4 text-primary-700 dark:text-primary-300">
                   No, you can use Resibilis without an account. However, creating a free account 
                   gives you access to additional features like receipt history, product catalog, 
                   and custom business name.
                 </div>
               </details>
 
-              <details className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <summary className="px-6 py-4 cursor-pointer font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50">
+              <details className="glass-panel rounded-xl border border-primary-200/30 dark:border-primary-700/30 overflow-hidden">
+                <summary className="px-6 py-4 cursor-pointer font-semibold text-foreground hover:bg-primary-100/40 dark:hover:bg-primary-800/30">
                   Is my data secure?
                 </summary>
-                <div className="px-6 pb-4 text-gray-600 dark:text-gray-400">
+                <div className="px-6 pb-4 text-primary-700 dark:text-primary-300">
                   Yes, we take security seriously. Receipt generation happens in your browser – 
                   your data is not sent to our servers unless you choose to save it. If you 
                   create an account, your data is protected with industry-standard encryption.
                 </div>
               </details>
 
-              <details className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <summary className="px-6 py-4 cursor-pointer font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50">
+              <details className="glass-panel rounded-xl border border-primary-200/30 dark:border-primary-700/30 overflow-hidden">
+                <summary className="px-6 py-4 cursor-pointer font-semibold text-foreground hover:bg-primary-100/40 dark:hover:bg-primary-800/30">
                   Can I use Resibilis on my phone?
                 </summary>
-                <div className="px-6 pb-4 text-gray-600 dark:text-gray-400">
+                <div className="px-6 pb-4 text-primary-700 dark:text-primary-300">
                   Absolutely! Resibilis is fully responsive and works great on smartphones and 
                   tablets. You can create receipts on the go, whether you&apos;re on Android or iOS.
                 </div>
               </details>
 
-              <details className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <summary className="px-6 py-4 cursor-pointer font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50">
+              <details className="glass-panel rounded-xl border border-primary-200/30 dark:border-primary-700/30 overflow-hidden">
+                <summary className="px-6 py-4 cursor-pointer font-semibold text-foreground hover:bg-primary-100/40 dark:hover:bg-primary-800/30">
                   Are the receipts official/valid for BIR?
                 </summary>
-                <div className="px-6 pb-4 text-gray-600 dark:text-gray-400">
+                <div className="px-6 pb-4 text-primary-700 dark:text-primary-300">
                   Resibilis generates informal receipts suitable for small transactions and 
                   personal record-keeping. For official BIR-compliant receipts, you&apos;ll need 
                   to use registered official receipts. Resibilis receipts are perfect for 

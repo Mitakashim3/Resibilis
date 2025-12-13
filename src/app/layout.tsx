@@ -54,8 +54,9 @@ export const viewport: Viewport = {
 };
 
 // Set to true when AdSense is approved
-const ADS_ENABLED = true;
-const ADSENSE_PUBLISHER_ID = 'ca-pub-8782757148864843'; // Replace with your ID
+const ADS_ENABLED = process.env.NODE_ENV === 'production';
+const ADSENSE_PUBLISHER_ID =
+  process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID ?? 'ca-pub-8782757148864843';
 
 export default function RootLayout({
   children,
