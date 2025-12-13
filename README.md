@@ -15,7 +15,7 @@
 
 | Category | Technology |
 |----------|------------|
-| Framework | Next.js 14 (App Router, TypeScript) |
+| Framework | Next.js 16 (App Router, TypeScript) |
 | Styling | Tailwind CSS + next-themes |
 | Auth | Supabase Auth (Google OAuth) |
 | Database | Supabase PostgreSQL |
@@ -179,7 +179,7 @@ NEXT_PUBLIC_APP_URL=https://resibilis.vercel.app
 
 ## 📝 License
 
-MIT © 2024 Resibilis
+MIT © 2025 Clark Jim Gabiota
 
 ---
 
