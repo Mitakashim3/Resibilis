@@ -111,8 +111,9 @@ export default function TermsPage() {
             
             <h3>6.1 Our Content</h3>
             <p>
-              The Resibilis name, logo, templates, and software are owned by Resibilis and 
-              protected by intellectual property laws.
+              Resibilis is created and maintained by Clark Jim Gabiota. The Resibilis name, logo,
+              templates, and software are owned by Clark Jim Gabiota and protected by applicable
+              intellectual property laws.
             </p>
 
             <h3>6.2 Your Content</h3>
@@ -188,11 +189,19 @@ export default function TermsPage() {
           <section>
             <h2>13. Contact</h2>
             <p>
-              For questions about these Terms, contact us at:
+              For questions about these Terms, contact me at:
             </p>
             <ul>
-              <li><strong>Email:</strong> legal@resibilis.com</li>
-              <li><strong>Support:</strong> support@resibilis.com</li>
+              <li>
+                <strong>Website:</strong>{' '}
+                <a
+                  href="https://mitakashime.vercel.app"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  https://mitakashime.vercel.app
+                </a>
+              </li>
             </ul>
           </section>
 

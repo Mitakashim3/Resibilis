@@ -4,9 +4,9 @@ import { Header, Footer } from '@/components/layout';
 import { createServerClient } from '@/lib/supabase/server';
 
 export const metadata: Metadata = {
-  title: 'About Resibilis - Our Story & Mission',
+  title: 'About Resibilis - Creator & Mission',
   description:
-    'Learn about Resibilis, the free receipt generator built for Filipino freelancers, students, and small business owners. Our mission is to make professional receipts accessible to everyone.',
+    'Learn about Resibilis and its creator, Clark Jim Gabiota. Resibilis is a secure, Next.js-based receipt generator built for Filipino freelancers and small business owners.',
 };
 
 export default async function AboutPage() {
@@ -26,26 +26,72 @@ export default async function AboutPage() {
               About <span className="text-primary-500">Resibilis</span>
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400">
-              Empowering Filipino entrepreneurs with professional receipt generation
+              Built with care for Filipino entrepreneurs
             </p>
           </div>
+
+          {/* Creator Section */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              Creator
+            </h2>
+            <div className="prose dark:prose-invert max-w-none">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Hi! I&apos;m <strong>Clark Jim Gabiota</strong>, a Computer Science student at
+                STI-West Negros University in Bacolod City, Philippines. My journey in tech began
+                with the precision of data handling as a LiDAR Annotator, but my true passion
+                quickly evolved into building the systems that process that data.
+              </p>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mt-4">
+                Today, I&apos;m a full-stack developer who bridges the gap between complex backend
+                architecture and intuitive user experiences. I don&apos;t just learn languages; I adopt
+                the right tools for the job—expanding from web fundamentals into systems programming
+                with Rust and Go, and advanced AI integration using Python.
+              </p>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mt-4">
+                My development philosophy centers on <strong>&quot;Pagpalangga&quot; (care)</strong>—building
+                software that is not only technically sound but genuinely helpful to its users.
+              </p>
+
+              <h3 className="text-gray-900 dark:text-white">Recent Work</h3>
+              <ul>
+                <li>
+                  <strong>Resibilis:</strong> I built this secure, Next.js 16-based platform to help Filipino
+                  freelancers and sari-sari store owners generate professional receipts, focusing on
+                  strict security measures like Row Level Security and XSS protection.
+                </li>
+                <li>
+                  <strong>Kalag:</strong> A RAG (Retrieval-Augmented Generation) application that lets users search
+                  and interact with PDFs using Google Gemini Vision and vector databases.
+                </li>
+                <li>
+                  <strong>OptiPOS:</strong> An offline-first POS system using Tauri (Rust) and SQLite so local retail
+                  businesses can keep running even when the internet cuts out.
+                </li>
+              </ul>
+
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                As I approach my graduation in 2026, I&apos;m focused on creating resilient, high-performance
+                applications that solve real-world problems.
+              </p>
+            </div>
+          </section>
 
           {/* Mission Section */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Our Mission
+              Mission
             </h2>
             <div className="prose dark:prose-invert max-w-none">
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                Resibilis was created with a simple yet powerful mission: to provide Filipino 
-                freelancers, students, sari-sari store owners, and small business entrepreneurs 
+                Resibilis was created with a simple yet powerful mission: to provide Filipino
+                freelancers, students, sari-sari store owners, and small business entrepreneurs
                 with a <strong>free, fast, and professional</strong> way to generate receipts.
               </p>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed mt-4">
-                We understand that many small businesses in the Philippines operate on tight budgets. 
-                Expensive accounting software or complicated invoicing tools are often out of reach. 
-                That&apos;s why we built Resibilis – a lightning-fast receipt generator that anyone can 
-                use, completely free of charge.
+                Many small businesses in the Philippines operate on tight budgets. Expensive accounting
+                software or complicated invoicing tools are often out of reach. That&apos;s why I built
+                Resibilis—a lightning-fast receipt generator that anyone can use, completely free of charge.
               </p>
             </div>
           </section>
@@ -218,6 +264,24 @@ export default async function AboutPage() {
               Start Creating Receipts
               <span>→</span>
             </Link>
+          </section>
+
+          {/* Contact Section */}
+          <section className="mt-12">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Contact</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+              <p className="text-gray-600 dark:text-gray-400">
+                Want to get in touch? Visit my website:
+              </p>
+              <a
+                href="https://mitakashime.vercel.app"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex mt-3 text-primary-600 dark:text-primary-400 hover:text-primary-500 transition-colors"
+              >
+                mitakashime.vercel.app
+              </a>
+            </div>
           </section>
         </div>
       </main>

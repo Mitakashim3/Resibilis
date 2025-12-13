@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     'small business',
     'free',
   ],
-  authors: [{ name: 'Resibilis Team' }],
-  creator: 'Resibilis',
+  authors: [{ name: 'Clark Jim Gabiota', url: 'https://mitakashime.vercel.app' }],
+  creator: 'Clark Jim Gabiota',
   icons: {
     icon: '/logo.svg',
     apple: '/logo.svg',

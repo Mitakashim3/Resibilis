@@ -76,10 +76,26 @@ export function Footer() {
         <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500 dark:text-gray-400">
             <p>
-              © {currentYear} Resibilis. Made with Pagpalanga for Filipino entrepreneurs.
+              © {currentYear} Resibilis. Created by{' '}
+              <a
+                href="https://mitakashime.vercel.app"
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary-600 dark:text-primary-400 hover:text-primary-500 transition-colors"
+              >
+                Clark Jim Gabiota
+              </a>
+              . Made with Pagpalanga for Filipino entrepreneurs.
             </p>
             <p className="text-xs">
-              Designed for freelancers, students, and small business owners
+              Contact: <a
+                href="https://mitakashime.vercel.app"
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary-600 dark:text-primary-400 hover:text-primary-500 transition-colors"
+              >
+                mitakashime.vercel.app
+              </a>
             </p>
           </div>
         </div>
