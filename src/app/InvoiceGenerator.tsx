@@ -147,11 +147,38 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
         format: dimension === 'a4' ? 'a4' : 'a5',
       });
 
-      // Add image to PDF with proper scaling
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const imgWidth = pdfWidth - 20; // 10mm margins on each side
-      const imgHeight = (height / width) * imgWidth;
-      pdf.addImage(dataUrl, 'PNG', 10, 10, imgWidth, imgHeight);
+      // Multi-page support: draw the same full image on each page with a negative Y offset.
+      // Anything outside the page bounds is clipped, effectively "slicing" the receipt.
+      const margin = 10; // mm
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const printableWidth = pageWidth - margin * 2;
+      const printableHeight = pageHeight - margin * 2;
+
+      // Prefer the actual image dimensions (pixelRatio may differ).
+      const imgEl = await new Promise<HTMLImageElement>((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('Failed to load PNG for PDF'));
+        img.src = dataUrl;
+      });
+
+      const imgWidthPx = imgEl.naturalWidth || width;
+      const imgHeightPx = imgEl.naturalHeight || height;
+      const imgHeightMm = (imgHeightPx * printableWidth) / imgWidthPx;
+
+      // First page
+      pdf.addImage(dataUrl, 'PNG', margin, margin, printableWidth, imgHeightMm);
+
+      // Additional pages, if needed
+      let remaining = imgHeightMm - printableHeight;
+      while (remaining > 0) {
+        pdf.addPage();
+        const yOffset = margin - (imgHeightMm - remaining);
+        pdf.addImage(dataUrl, 'PNG', margin, yOffset, printableWidth, imgHeightMm);
+        remaining -= printableHeight;
+      }
+
       pdf.save(`resibo-${generateInvoiceNumber()}.pdf`);
 
       // Auto-save to history if authenticated
