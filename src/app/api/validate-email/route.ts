@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { validateEmail, checkRateLimit } from '@/lib/security';
+import { checkRateLimitShared, getClientIpFromHeaders } from '@/lib/ratelimit';
 
 /**
  * Email Validation Endpoint
@@ -8,12 +9,13 @@ import { validateEmail, checkRateLimit } from '@/lib/security';
 export async function POST(req: Request) {
   try {
     // Get client IP for rate limiting
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || 
-               req.headers.get('x-real-ip') || 
-               'unknown';
+    const ip = getClientIpFromHeaders(req.headers);
 
     // Rate limit: 10 requests per minute per IP
-    const rateLimit = checkRateLimit(`email-validate:${ip}`, 10, 60000);
+    // Prefer shared limiter (Upstash) when configured; otherwise use in-memory fallback.
+    const shared = await checkRateLimitShared(`email-validate:${ip}`);
+    const rateLimit =
+      shared ?? checkRateLimit(`email-validate:${ip}`, 10, 60000);
     
     if (!rateLimit.allowed) {
       return NextResponse.json(
