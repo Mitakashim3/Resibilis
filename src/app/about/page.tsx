@@ -30,7 +30,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          {/* Creator Section */}
+          {/* Creator Section 
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               Creator
@@ -77,7 +77,7 @@ export default async function AboutPage() {
             </div>
           </section>
 
-          {/* Mission Section */}
+          Mission Section */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               Mission
