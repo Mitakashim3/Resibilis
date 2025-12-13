@@ -432,7 +432,7 @@ export function InvoiceForm({
       {/* Notes */}
       <Textarea
         label="Notes / Mga Tala (Optional)"
-        placeholder="Thank you for your business! / Salamat sa inyong suporta!"
+        placeholder="Thank you for your support! / Salamat sa inyong suporta!"
         {...register('notes')}
         error={errors.notes?.message}
       />
