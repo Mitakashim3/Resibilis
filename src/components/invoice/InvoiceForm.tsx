@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -170,7 +171,7 @@ export function InvoiceForm({
       {/* Receipt Dimension Selector */}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">
-          Receipt Size / Laki ng Resibo
+          Receipt Size
         </label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {dimensionOptions.map((option) => (
@@ -195,7 +196,7 @@ export function InvoiceForm({
       {/* Language Toggle */}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">
-          Receipt Language / Wika ng Resibo
+          Receipt Language
         </label>
         <Controller
           name="language"
@@ -241,7 +242,7 @@ export function InvoiceForm({
 
       {/* Business Name / Receipt Title */}
       <Input
-        label="Business Name / Pangalan ng Negosyo (Optional)"
+        label="Business Name (Optional)"
         placeholder="My Business Name / RESIBILIS"
         error={errors.businessName?.message}
         {...register('businessName')}
@@ -249,7 +250,7 @@ export function InvoiceForm({
 
       {/* Customer Name */}
       <Input
-        label="Customer Name / Pangalan ng Customer"
+        label="Customer Name"
         placeholder="Juan dela Cruz"
         error={errors.customerName?.message}
         {...register('customerName')}
@@ -262,7 +263,7 @@ export function InvoiceForm({
         render={({ field }) => (
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Currency / Pera
+              Currency
             </label>
             <div className="flex gap-2">
               {currencyOptions.map((option) => (
@@ -292,9 +293,23 @@ export function InvoiceForm({
       {/* Line Items */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <label className="block text-sm font-medium text-foreground">
-            Items / Mga Produkto
-          </label>
+          <div>
+            <label className="block text-sm font-medium text-foreground">
+              Items
+            </label>
+            {isAuthenticated && (
+              <p className="mt-1 text-xs text-primary-700/80 dark:text-primary-300/80">
+                Tip: Add products in{' '}
+                <Link
+                  href="/products"
+                  className="underline underline-offset-2 hover:text-primary-600 dark:hover:text-primary-200"
+                >
+                  Products
+                </Link>
+                , then click the ⌄ button next to “Item name” to insert them here.
+              </p>
+            )}
+          </div>
           <Button
             type="button"
             variant="outline"
@@ -302,7 +317,7 @@ export function InvoiceForm({
             onClick={() => append(createEmptyItem())}
             disabled={fields.length >= 50}
           >
-            + Add Item
+            Add Item
           </Button>
         </div>
 
@@ -431,7 +446,7 @@ export function InvoiceForm({
 
       {/* Notes */}
       <Textarea
-        label="Notes / Mga Tala (Optional)"
+        label="Notes (Optional)"
         placeholder="Thank you for your support! / Salamat sa inyong suporta!"
         {...register('notes')}
         error={errors.notes?.message}

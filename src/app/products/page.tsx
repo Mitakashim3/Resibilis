@@ -30,7 +30,11 @@ export default async function ProductsPage() {
             </h1>
             <p className="text-primary-700 dark:text-primary-300">
               Save your products and services here so you can quickly add them to your receipts 
-              using a dropdown instead of typing them every time.
+              using a dropdown instead of typing them every time. After you add an item here, go back to{' '}
+              <a href="/" className="underline underline-offset-2 hover:text-primary-600 dark:hover:text-primary-200">
+                Create Receipt
+              </a>
+              {' '}and click the small ⌄ button next to “Item name” to pick it.
             </p>
           </div>
 
@@ -44,7 +48,7 @@ export default async function ProductsPage() {
             </h3>
             <p className="text-sm text-primary-700 dark:text-primary-300">
               Once you&apos;ve added items here, you can quickly select them when creating a new receipt.
-              The default price will be pre-filled, saving you time!
+              The default price will be pre-filled, saving you time. You can always come back here to edit or delete items.
             </p>
           </div>
         </div>
