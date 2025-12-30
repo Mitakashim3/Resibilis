@@ -7,49 +7,48 @@ import { MetadataRoute } from 'next';
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://resibilis.vercel.app';
-  const currentDate = new Date();
 
   return [
     {
       url: baseUrl,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'weekly' as const,
       priority: 1.0,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
       url: `${baseUrl}/pricing`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
     {
       url: `${baseUrl}/products`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     {
       url: `${baseUrl}/how-to-use`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
       url: `${baseUrl}/privacy`,
-      lastModified: currentDate,
-      changeFrequency: 'yearly',
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
     {
       url: `${baseUrl}/terms`,
-      lastModified: currentDate,
-      changeFrequency: 'yearly',
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
   ];
