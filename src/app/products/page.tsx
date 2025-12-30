@@ -8,6 +8,13 @@ import { Card } from '@/components/ui';
 export const metadata: Metadata = {
   title: 'Product Catalog | Resibilis',
   description: 'Manage your products and services for quick receipt generation',
+  alternates: {
+    canonical: 'https://resibilis.vercel.app/products',
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default async function ProductsPage() {

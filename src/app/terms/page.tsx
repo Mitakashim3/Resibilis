@@ -3,6 +3,15 @@ import { Header, Footer } from '@/components/layout';
 export const metadata = {
   title: 'Terms of Service | Resibilis',
   description: 'Terms of Service for Resibilis Receipt Generator',
+  alternates: {
+    canonical: 'https://resibilis.vercel.app/terms',
+  },
+  openGraph: {
+    title: 'Terms of Service | Resibilis',
+    description: 'Terms of Service for Resibilis Receipt Generator',
+    url: 'https://resibilis.vercel.app/terms',
+    type: 'website',
+  },
 };
 
 export default function TermsPage() {

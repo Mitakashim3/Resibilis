@@ -4,7 +4,11 @@ import { LiquidBackground } from '@/components/ui/LiquidBackground';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Resibilis - Lightning-Fast Receipt Generator',
+  metadataBase: new URL('https://resibilis.vercel.app'),
+  title: {
+    default: 'Resibilis - Lightning-Fast Receipt Generator',
+    template: '%s | Resibilis',
+  },
   description:
     'Free, secure receipt generator for Filipino freelancers, students, and small sellers. Create professional receipts instantly.',
   keywords: [
@@ -15,9 +19,19 @@ export const metadata: Metadata = {
     'freelancer',
     'small business',
     'free',
+    'receipt maker',
+    'online receipt',
+    'Philippines',
+    'professional receipts',
   ],
   authors: [{ name: 'Clark Jim Gabiota', url: 'https://mitakashime.vercel.app' }],
   creator: 'Clark Jim Gabiota',
+  publisher: 'Resibilis',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: '/logo.svg',
     apple: '/logo.svg',
@@ -30,17 +44,37 @@ export const metadata: Metadata = {
     description:
       'Free, secure receipt generator for Filipino freelancers, students, and small sellers.',
     siteName: 'Resibilis',
+    images: [
+      {
+        url: '/og-image.png', // You'll need to create this
+        width: 1200,
+        height: 630,
+        alt: 'Resibilis - Receipt Generator',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Resibilis - Lightning-Fast Receipt Generator',
     description:
       'Free, secure receipt generator for Filipino freelancers, students, and small sellers.',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
+  alternates: {
+    canonical: 'https://resibilis.vercel.app',
+  },
+  category: 'Technology',
 };
 
 export const viewport: Viewport = {
@@ -63,9 +97,37 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // JSON-LD Structured Data for better SEO
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Resibilis',
+    url: 'https://resibilis.vercel.app',
+    description:
+      'Free, secure receipt generator for Filipino freelancers, students, and small sellers',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'All',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'PHP',
+    },
+    author: {
+      '@type': 'Person',
+      name: 'Clark Jim Gabiota',
+      url: 'https://mitakashime.vercel.app',
+    },
+    inLanguage: 'en-PH',
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {/* Google AdSense - Enable when approved */}
         {ADS_ENABLED && (
           <script

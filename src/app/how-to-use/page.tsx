@@ -7,6 +7,15 @@ export const metadata: Metadata = {
   title: 'How to Use Resibilis - Step-by-Step Guide',
   description:
     'Learn how to create professional receipts with Resibilis. Step-by-step guide for freelancers, students, and small business owners in the Philippines.',
+  alternates: {
+    canonical: 'https://resibilis.vercel.app/how-to-use',
+  },
+  openGraph: {
+    title: 'How to Use Resibilis - Step-by-Step Guide',
+    description: 'Learn how to create professional receipts with Resibilis. Complete guide for Filipino freelancers.',
+    url: 'https://resibilis.vercel.app/how-to-use',
+    type: 'article',
+  },
 };
 
 export default async function HowToUsePage() {

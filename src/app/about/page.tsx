@@ -7,6 +7,16 @@ export const metadata: Metadata = {
   title: 'About Resibilis - Creator & Mission',
   description:
     'Learn about Resibilis and its creator, Clark Jim Gabiota. Resibilis is a secure, Next.js-based receipt generator built for Filipino freelancers and small business owners.',
+  alternates: {
+    canonical: 'https://resibilis.vercel.app/about',
+  },
+  openGraph: {
+    title: 'About Resibilis - Creator & Mission',
+    description:
+      'Learn about Resibilis and its creator, Clark Jim Gabiota. A secure receipt generator built for Filipino freelancers.',
+    url: 'https://resibilis.vercel.app/about',
+    type: 'website',
+  },
 };
 
 export default async function AboutPage() {

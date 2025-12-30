@@ -3,6 +3,15 @@ import { Header, Footer } from '@/components/layout';
 export const metadata = {
   title: 'Privacy Policy | Resibilis',
   description: 'Privacy Policy for Resibilis Receipt Generator - compliant with Philippine Data Privacy Act of 2012',
+  alternates: {
+    canonical: 'https://resibilis.vercel.app/privacy',
+  },
+  openGraph: {
+    title: 'Privacy Policy | Resibilis',
+    description: 'Privacy Policy for Resibilis Receipt Generator - DPA 2012 compliant',
+    url: 'https://resibilis.vercel.app/privacy',
+    type: 'website',
+  },
 };
 
 export default function PrivacyPage() {
