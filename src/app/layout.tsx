@@ -114,17 +114,30 @@ export default function RootLayout({
         '@type': 'Organization',
         '@id': 'https://resibilis.vercel.app/#organization',
         name: 'Resibilis',
+        alternateName: 'Resibilis Receipt Generator',
         url: 'https://resibilis.vercel.app',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://resibilis.vercel.app/logo.svg',
+          width: 512,
+          height: 512,
+        },
+        sameAs: [],
+        description: 'Free receipt generator for Filipino freelancers, students, and small business owners',
       },
       {
         '@type': 'WebApplication',
         '@id': 'https://resibilis.vercel.app/#webapp',
         name: 'Resibilis',
+        alternateName: 'Resibilis Receipt Generator',
         url: 'https://resibilis.vercel.app',
         description:
           'Free, secure receipt generator for Filipino freelancers, students, and small sellers',
         applicationCategory: 'BusinessApplication',
         operatingSystem: 'All',
+        brand: {
+          '@id': 'https://resibilis.vercel.app/#organization',
+        },
         offers: {
           '@type': 'Offer',
           price: '0',

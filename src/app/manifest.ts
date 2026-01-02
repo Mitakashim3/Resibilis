@@ -18,6 +18,12 @@ export default function manifest(): MetadataRoute.Manifest {
         src: '/logo.svg',
         sizes: 'any',
         type: 'image/svg+xml',
+        purpose: 'any maskable',
+      },
+      {
+        src: '/favicon.ico',
+        sizes: '16x16 32x32 48x48',
+        type: 'image/x-icon',
       },
     ],
     categories: ['business', 'finance', 'productivity'],
