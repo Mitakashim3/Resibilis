@@ -3,6 +3,7 @@
 import { forwardRef, useState, useEffect } from 'react';
 import { InvoiceFormData, calculateTotal, Language } from '@/lib/schemas';
 import { formatCurrency, generateInvoiceNumber } from '@/lib/utils';
+import { calculateReceiptTotal } from '@/lib/utils/taxDiscount';
 import type { ReceiptDimension } from './InvoiceForm';
 
 const dimensionWidths: Record<ReceiptDimension, number> = {
@@ -21,6 +22,9 @@ const translations: Record<Language, {
   item: string;
   qty: string;
   amount: string;
+  subtotal: string;
+  discount: string;
+  tax: string;
   total: string;
   notes: string;
   thankYou: string;
@@ -35,6 +39,9 @@ const translations: Record<Language, {
     item: 'ITEM',
     qty: 'QTY',
     amount: 'AMOUNT',
+    subtotal: 'Subtotal',
+    discount: 'Discount',
+    tax: 'Tax',
     total: 'TOTAL',
     notes: 'Notes',
     thankYou: 'Thank you for your support!',
@@ -49,6 +56,9 @@ const translations: Record<Language, {
     item: 'BAGAY',
     qty: 'BILANG',
     amount: 'HALAGA',
+    subtotal: 'Subtotal',
+    discount: 'Diskwento',
+    tax: 'Buwis',
     total: 'KABUUAN',
     notes: 'Mga Tala',
     thankYou: 'Salamat sa inyong suporta!',
@@ -89,7 +99,33 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
       }));
     }, [invoiceNumber, language]);
     
-    const total = calculateTotal(data.items);
+    // Calculate totals with tax and discount - wrapped in try-catch
+    let calculation;
+    let calculationError: string | null = null;
+    
+    try {
+      calculation = calculateReceiptTotal(
+        data.items.map((item) => ({
+          price: Number(item.price) || 0,
+          qty: Number(item.qty) || 0,
+        })),
+        {
+          taxPercent: data.taxPercent || 0,
+          discountType: data.discountType || 'percentage',
+          discountValue: data.discountValue || 0,
+        }
+      );
+    } catch (error) {
+      // Fallback to safe calculation if error occurs
+      calculationError = error instanceof Error ? error.message : 'Calculation error';
+      calculation = {
+        subtotal: 0,
+        taxAmount: 0,
+        discountAmount: 0,
+        total: 0,
+      };
+    }
+    
     const currencySymbol = data.currency === 'PHP' ? '₱' : '$';
     const width = dimensionWidths[dimension];
 
@@ -186,6 +222,25 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
             width: '100%',
           }}
         >
+          {/* Calculation Error Warning */}
+          {calculationError && (
+            <div style={{ 
+              backgroundColor: '#fef2f2', 
+              border: '2px solid #fca5a5',
+              borderRadius: '6px',
+              padding: '12px',
+              marginBottom: `${typography.dividerMargin}px`,
+              textAlign: 'center'
+            }}>
+              <p style={{ color: '#dc2626', fontSize: `${typography.muted}px`, fontWeight: 600, margin: 0 }}>
+                ⚠️ {calculationError}
+              </p>
+              <p style={{ color: '#991b1b', fontSize: `${typography.muted - 1}px`, margin: '4px 0 0 0' }}>
+                Please check tax and discount values
+              </p>
+            </div>
+          )}
+
           {/* Header */}
           <div style={{ textAlign: 'center', borderBottom: '2px dashed #d1d5db', paddingBottom: `${typography.dividerMargin}px`, marginBottom: `${typography.dividerMargin}px` }}>
             <h1
@@ -275,11 +330,54 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
             style={{ borderTop: '1px dashed #d1d5db', margin: `${typography.dividerMargin}px 0` }}
           />
 
+          {/* Calculation Breakdown */}
+          <div style={{ fontSize: `${typography.itemRow}px` }}>
+            {/* Subtotal */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+              <span style={{ color: '#6b7280' }}>{t.subtotal}:</span>
+              <span style={{ color: '#000000', fontWeight: 500 }}>
+                {currencySymbol}{calculation.subtotal.toFixed(2)}
+              </span>
+            </div>
+            
+            {/* Discount (if applied) */}
+            {calculation.discountAmount > 0 && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                <span style={{ color: '#6b7280' }}>
+                  {t.discount}
+                  {data.discountType === 'percentage' && ` (${data.discountValue}%)`}:
+                </span>
+                <span style={{ color: '#16a34a', fontWeight: 500 }}>
+                  -{currencySymbol}{calculation.discountAmount.toFixed(2)}
+                </span>
+              </div>
+            )}
+            
+            {/* Tax (if applied) */}
+            {calculation.taxAmount > 0 && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                <span style={{ color: '#6b7280' }}>
+                  {t.tax} ({data.taxPercent}%):
+                </span>
+                <span style={{ color: '#000000', fontWeight: 500 }}>
+                  +{currencySymbol}{calculation.taxAmount.toFixed(2)}
+                </span>
+              </div>
+            )}
+          </div>
+          
+          {/* Divider before total (only if tax or discount applied) */}
+          {(calculation.taxAmount > 0 || calculation.discountAmount > 0) && (
+            <div
+              style={{ borderTop: '1px solid #d1d5db', margin: `${typography.dividerMargin / 2}px 0` }}
+            />
+          )}
+
           {/* Total */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: `${typography.total}px`, fontWeight: 'bold' }}>
             <span style={{ color: '#000000' }}>{t.total}</span>
             <span style={{ color: '#000000' }}>
-              {formatCurrency(total, data.currency)}
+              {currencySymbol}{calculation.total.toFixed(2)}
             </span>
           </div>
 

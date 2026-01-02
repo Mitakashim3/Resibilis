@@ -80,7 +80,7 @@ export function AdBanner({ slot, size = 'responsive', className = '' }: AdBanner
   return (
     <div 
       ref={adRef}
-      className={`ad-container w-full overflow-hidden flex justify-center ${className}`}
+      className={`ad-container w-full overflow-hidden flex justify-center bg-primary-50/50 dark:bg-primary-900/5 rounded-lg border border-primary-100 dark:border-primary-800/30 p-2 ${className}`}
       aria-label="Advertisement"
     >
       <ins
@@ -120,9 +120,9 @@ export function AdPlaceholder({
     <div
       className={`
         flex items-center justify-center
-        bg-gray-100 dark:bg-gray-800
-        border-2 border-dashed border-gray-300 dark:border-gray-600
-        rounded-lg text-gray-500 dark:text-gray-400
+        bg-primary-50 dark:bg-primary-900/10
+        border-2 border-dashed border-primary-200 dark:border-primary-700
+        rounded-lg text-primary-600 dark:text-primary-400
         text-sm font-medium
         ${isResponsive ? 'w-full h-24' : ''}
         ${className}

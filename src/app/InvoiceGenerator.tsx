@@ -17,6 +17,7 @@ import {
   defaultInvoiceValues,
   calculateTotal,
 } from '@/lib/schemas';
+import { calculateReceiptTotal } from '@/lib/utils/taxDiscount';
 import { generateInvoiceNumber } from '@/lib/utils';
 import type { User } from '@supabase/supabase-js';
 import type { Database } from '@/types/database';
@@ -68,13 +69,21 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
     if (!authUser) return;
 
     try {
-      const total = calculateTotal(data.items);
+      // Calculate total with tax and discount
+      const calculation = calculateReceiptTotal(
+        data.items.map(item => ({ price: Number(item.price) || 0, qty: Number(item.qty) || 0 })),
+        {
+          taxPercent: data.taxPercent || 0,
+          discountType: data.discountType || 'percentage',
+          discountValue: data.discountValue || 0,
+        }
+      );
       
       const { error } = await supabase.from('invoices').insert({
         user_id: authUser.id,
         customer_name: data.customerName,
         items: JSON.parse(JSON.stringify(data.items)),
-        total_amount: total,
+        total_amount: calculation.total,
         currency: data.currency,
         notes: data.notes || null,
       } as Database['public']['Tables']['invoices']['Insert']);
@@ -215,13 +224,21 @@ export function InvoiceGenerator({ user }: InvoiceGeneratorProps) {
     try {
       setIsSaving(true);
       
-      const total = calculateTotal(data.items);
+      // Calculate total with tax and discount
+      const calculation = calculateReceiptTotal(
+        data.items.map(item => ({ price: Number(item.price) || 0, qty: Number(item.qty) || 0 })),
+        {
+          taxPercent: data.taxPercent || 0,
+          discountType: data.discountType || 'percentage',
+          discountValue: data.discountValue || 0,
+        }
+      );
       
       const { error } = await supabase.from('invoices').insert({
         user_id: user.id,
         customer_name: data.customerName,
         items: JSON.parse(JSON.stringify(data.items)),
-        total_amount: total,
+        total_amount: calculation.total,
         currency: data.currency,
         notes: data.notes || null,
       } as Database['public']['Tables']['invoices']['Insert']);

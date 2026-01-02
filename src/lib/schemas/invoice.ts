@@ -51,8 +51,8 @@ export type InvoiceItem = z.infer<typeof invoiceItemSchema>;
 // Language type for receipt translations
 export type Language = 'en' | 'tl';
 
-// Main invoice form schema
-export const invoiceFormSchema = z.object({
+// Base invoice form schema (without refinements)
+const baseInvoiceFormSchema = z.object({
   businessName: sanitizedString(200).optional().default(''),
   customerName: sanitizedString(200).refine(
     (val) => val.length >= 1,
@@ -65,12 +65,37 @@ export const invoiceFormSchema = z.object({
   notes: sanitizedString(1000).optional().default(''),
   currency: z.enum(['PHP', 'USD']).default('PHP'),
   language: z.enum(['en', 'tl']).default('en'),
+  // Tax and Discount fields
+  taxPercent: z
+    .number()
+    .min(0, 'Tax cannot be negative')
+    .max(100, 'Tax cannot exceed 100%')
+    .optional()
+    .default(0),
+  discountType: z.enum(['flat', 'percentage']).optional().default('percentage'),
+  discountValue: z
+    .number()
+    .min(0, 'Discount cannot be negative')
+    .optional()
+    .default(0),
+});
+
+// Main invoice form schema with cross-field validation
+export const invoiceFormSchema = baseInvoiceFormSchema.refine((data) => {
+  // Cross-field validation: percentage discount cannot exceed 100%
+  if (data.discountType === 'percentage' && (data.discountValue || 0) > 100) {
+    return false;
+  }
+  return true;
+}, {
+  message: 'Discount percentage cannot exceed 100%',
+  path: ['discountValue'],
 });
 
 export type InvoiceFormData = z.infer<typeof invoiceFormSchema>;
 
 // Schema for saving to database (includes computed fields)
-export const invoiceDbSchema = invoiceFormSchema.extend({
+export const invoiceDbSchema = baseInvoiceFormSchema.extend({
   totalAmount: z.number().min(0),
 });
 
@@ -113,4 +138,7 @@ export const defaultInvoiceValues: InvoiceFormData = {
   notes: '',
   currency: 'PHP',
   language: 'en',
+  taxPercent: 0,
+  discountType: 'percentage',
+  discountValue: 0,
 };
