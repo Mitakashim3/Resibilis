@@ -34,7 +34,8 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: '/logo.svg',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
     apple: '/logo.svg',
   },
   openGraph: {
@@ -101,24 +102,42 @@ export default function RootLayout({
   // JSON-LD Structured Data for better SEO
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: 'Resibilis',
-    url: 'https://resibilis.vercel.app',
-    description:
-      'Free, secure receipt generator for Filipino freelancers, students, and small sellers',
-    applicationCategory: 'BusinessApplication',
-    operatingSystem: 'All',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'PHP',
-    },
-    author: {
-      '@type': 'Person',
-      name: 'Clark Jim Gabiota',
-      url: 'https://mitakashime.vercel.app',
-    },
-    inLanguage: 'en-PH',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': 'https://resibilis.vercel.app/#website',
+        url: 'https://resibilis.vercel.app',
+        name: 'Resibilis',
+        inLanguage: 'en-PH',
+      },
+      {
+        '@type': 'Organization',
+        '@id': 'https://resibilis.vercel.app/#organization',
+        name: 'Resibilis',
+        url: 'https://resibilis.vercel.app',
+      },
+      {
+        '@type': 'WebApplication',
+        '@id': 'https://resibilis.vercel.app/#webapp',
+        name: 'Resibilis',
+        url: 'https://resibilis.vercel.app',
+        description:
+          'Free, secure receipt generator for Filipino freelancers, students, and small sellers',
+        applicationCategory: 'BusinessApplication',
+        operatingSystem: 'All',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'PHP',
+        },
+        author: {
+          '@type': 'Person',
+          name: 'Clark Jim Gabiota',
+          url: 'https://mitakashime.vercel.app',
+        },
+        inLanguage: 'en-PH',
+      },
+    ],
   };
 
   return (
