@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Providers } from './providers';
+import { Analytics } from '@vercel/analytics/react';
 import { LiquidBackground } from '@/components/ui/LiquidBackground';
 import './globals.css';
 
@@ -140,6 +141,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <LiquidBackground />
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
