@@ -8,6 +8,7 @@
 - [x] [src/app/manifest.ts](../src/app/manifest.ts) - PWA manifest for mobile SEO
 - [x] [vercel.json](../vercel.json) - Vercel-specific headers
 - [x] [docs/SEO_GUIDE.md](./SEO_GUIDE.md) - Complete SEO documentation
+- [x] [docs/KEYWORD_STRATEGY.md](./KEYWORD_STRATEGY.md) - **Comprehensive keyword research & strategy**
 
 ### Files Enhanced
 - [x] [src/app/layout.tsx](../src/app/layout.tsx)
@@ -28,7 +29,44 @@
 
 ---
 
-## 🚨 CRITICAL - DO IMMEDIATELY
+## � KEYWORD STRATEGY
+
+### **Current Implementation**
+✅ **11 keywords** in `layout.tsx` covering:
+- Head terms: receipt generator, resibo, invoice
+- Body keywords: receipt maker, online receipt, professional receipts
+- Modifiers: Filipino, Philippines, freelancer, small business, free
+
+### **Recommended Focus** (See [KEYWORD_STRATEGY.md](./KEYWORD_STRATEGY.md))
+
+#### **Phase 1 - Month 1-2 (Quick Wins)**
+Target these long-tail, low-competition keywords FIRST:
+- ✅ "free receipt generator for freelancers"
+- ✅ "receipt generator philippines"
+- ✅ "resibo maker"
+- ✅ "digital receipt maker"
+- ✅ "receipt maker no sign up"
+
+#### **Phase 2 - Month 3-4 (Build Authority)**
+- "free receipt generator"
+- "online receipt maker"
+- "invoice generator free"
+- "professional receipt generator"
+
+#### **Phase 3 - Month 5-6+ (Competitive Terms)**
+- "receipt generator" (head term)
+- "invoice maker" (head term)
+- "free receipt" (head term)
+
+### **Quick Actions**
+- [ ] Review [KEYWORD_STRATEGY.md](./KEYWORD_STRATEGY.md) - Full keyword list with search volumes
+- [ ] Update `layout.tsx` keywords with expanded list (30+ keywords)
+- [ ] Create FAQ section using long-tail keyword questions
+- [ ] Plan blog content around target keywords
+
+---
+
+## �🚨 CRITICAL - DO IMMEDIATELY
 
 ### 1. Create OpenGraph Image (15 minutes)
 ```bash

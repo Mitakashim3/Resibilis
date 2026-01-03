@@ -11,19 +11,57 @@ export const metadata: Metadata = {
     template: '%s | Resibilis',
   },
   description:
-    'Free, secure receipt generator for Filipino freelancers, students, and small sellers. Create professional receipts instantly.',
+    'Free, secure receipt generator for Filipino freelancers, students, and small sellers. Create professional receipts instantly. No sign-up required.',
   keywords: [
+    // Head Terms (High Priority)
     'receipt generator',
+    'invoice maker',
     'resibo',
-    'Filipino',
-    'invoice',
+    'free receipt',
+    'receipt maker',
+    
+    // Body Keywords (Medium Priority)
+    'receipt generator philippines',
+    'free receipt generator',
+    'online receipt maker',
+    'invoice generator free',
+    'digital receipt maker',
+    'professional receipt generator',
+    'business receipt maker',
+    'receipt template generator',
+    'resibo generator',
+    'filipino receipt maker',
+    
+    // Long-Tail Keywords (Quick Wins)
+    'free receipt generator for freelancers',
+    'receipt maker for filipino freelancers',
+    'receipt generator for small business philippines',
+    'online receipt generator no sign up',
+    'how to create receipt online',
+    'instant receipt maker',
+    'receipt generator with logo',
+    'customizable receipt template',
+    'free invoice generator philippines',
+    
+    // Filipino/Tagalog Keywords
+    'resibo maker',
+    'gumawa ng resibo',
+    'resibo para sa negosyo',
+    'online resibo',
+    
+    // Audience-Specific
     'freelancer',
     'small business',
+    'filipino',
+    'philippines',
+    'students',
+    
+    // Feature Modifiers
     'free',
-    'receipt maker',
-    'online receipt',
-    'Philippines',
-    'professional receipts',
+    'instant',
+    'professional',
+    'online',
+    'no sign up',
   ],
   authors: [{ name: 'Clark Jim Gabiota', url: 'https://mitakashime.vercel.app' }],
   creator: 'Clark Jim Gabiota',
@@ -42,9 +80,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_PH',
     url: 'https://resibilis.vercel.app',
-    title: 'Resibilis - Lightning-Fast Receipt Generator',
+    title: 'Resibilis - Free Receipt Generator for Filipino Freelancers & Small Business',
     description:
-      'Free, secure receipt generator for Filipino freelancers, students, and small sellers.',
+      'Create professional receipts instantly. Free receipt generator for Filipino freelancers, students, and small business. No sign-up required. Download as PNG or PDF.',
     siteName: 'Resibilis',
     images: [
       {
@@ -57,9 +95,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Resibilis - Lightning-Fast Receipt Generator',
+    title: 'Resibilis - Free Receipt Generator Philippines',
     description:
-      'Free, secure receipt generator for Filipino freelancers, students, and small sellers.',
+      'Create professional receipts instantly. Free for Filipino freelancers, students, and small business. No sign-up required.',
     images: ['/og-image.png'],
   },
   robots: {
