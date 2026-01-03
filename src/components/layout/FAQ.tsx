@@ -59,34 +59,34 @@ export function FAQ() {
   };
 
   return (
-    <section className="py-12 bg-white dark:bg-gray-900">
+    <section className="py-16 bg-gradient-to-b from-primary-50 via-white to-primary-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-primary-600 dark:text-primary-400">
+            <p className="text-lg text-gray-600 dark:text-gray-400">
               Everything you need to know about using Resibilis
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800/50"
+                className="border border-primary-200 dark:border-gray-700 rounded-xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-all duration-200"
               >
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
                   aria-expanded={openIndex === index}
                 >
-                  <h3 className="font-semibold text-foreground pr-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-white pr-4">
                     {faq.question}
                   </h3>
                   <svg
-                    className={`w-5 h-5 text-primary-500 flex-shrink-0 transition-transform ${
+                    className={`w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 transition-transform ${
                       openIndex === index ? 'rotate-180' : ''
                     }`}
                     fill="none"
@@ -110,7 +110,7 @@ export function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="px-6 pb-4 text-primary-700 dark:text-primary-300">
+                      <div className="px-6 pb-4 text-gray-700 dark:text-gray-300 leading-relaxed">
                         {faq.answer}
                       </div>
                     </motion.div>
