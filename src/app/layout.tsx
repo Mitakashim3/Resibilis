@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://resibilis.vercel.app'),
   title: {
     default: 'Resibilis - Lightning-Fast Receipt Generator',
-    template: '%s | Resibilis',
+    template: '%s | Resibilis - Free adn Fast Receipt Generator',
   },
   description:
     'Free, secure receipt generator for Filipino freelancers, students, and small sellers. Create professional receipts instantly. No sign-up required.',
