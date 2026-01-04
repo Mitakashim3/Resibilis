@@ -247,6 +247,76 @@ export default async function HowToUsePage() {
         </div>
       </main>
       <Footer />
+      
+      {/* HowTo Schema for Featured Snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'HowTo',
+            name: 'How to Create a Professional Receipt with Resibilis',
+            description: 'Learn how to create professional receipts in 4 simple steps using Resibilis receipt generator. Perfect for Filipino freelancers, students, and small business owners.',
+            image: 'https://resibilis.vercel.app/og-image.png',
+            totalTime: 'PT2M',
+            estimatedCost: {
+              '@type': 'MonetaryAmount',
+              currency: 'PHP',
+              value: '0',
+            },
+            supply: [
+              {
+                '@type': 'HowToSupply',
+                name: 'Internet connection',
+              },
+              {
+                '@type': 'HowToSupply',
+                name: 'Customer information',
+              },
+              {
+                '@type': 'HowToSupply',
+                name: 'Product or service details',
+              },
+            ],
+            tool: [
+              {
+                '@type': 'HowToTool',
+                name: 'Resibilis Receipt Generator',
+              },
+            ],
+            step: [
+              {
+                '@type': 'HowToStep',
+                name: 'Enter Customer Information',
+                text: 'Start by entering the customer\'s name. This will appear at the top of the receipt. You can also customize your business name if you have an account.',
+                image: 'https://resibilis.vercel.app/og-image.png',
+                url: 'https://resibilis.vercel.app/how-to-use#step1',
+              },
+              {
+                '@type': 'HowToStep',
+                name: 'Add Your Items',
+                text: 'Click "Add Item" to add products or services to your receipt. For each item, enter the name, quantity, and price. The total will be calculated automatically.',
+                image: 'https://resibilis.vercel.app/og-image.png',
+                url: 'https://resibilis.vercel.app/how-to-use#step2',
+              },
+              {
+                '@type': 'HowToStep',
+                name: 'Customize Your Receipt',
+                text: 'Choose your preferred currency (PHP, USD, or EUR), language (English or Tagalog), size (Standard, Compact, or Wide), and add any additional notes.',
+                image: 'https://resibilis.vercel.app/og-image.png',
+                url: 'https://resibilis.vercel.app/how-to-use#step3',
+              },
+              {
+                '@type': 'HowToStep',
+                name: 'Download or Save',
+                text: 'Download your receipt as PNG for high-quality images or PDF for professional documents. With an account, you can also save receipts to your history for future reference.',
+                image: 'https://resibilis.vercel.app/og-image.png',
+                url: 'https://resibilis.vercel.app/how-to-use#step4',
+              },
+            ],
+          }),
+        }}
+      />
     </>
   );
 }
