@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Providers } from './providers';
 import { Analytics } from '@vercel/analytics/react';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { LiquidBackground } from '@/components/ui/LiquidBackground';
 import './globals.css';
 
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://resibilis.vercel.app'),
   title: {
     default: 'Resibilis - Lightning-Fast Receipt Generator',
-    template: '%s | Resibilis - Free adn Fast Receipt Generator',
+    template: '%s | Resibilis - Free and Fast Receipt Generator',
   },
   description:
     '🔒 Trusted by thousands of Filipino freelancers. Create professional receipts in seconds—100% FREE, secure, and no sign-up required. Download as PNG or PDF instantly.',
@@ -235,6 +236,9 @@ export default function RootLayout({
         <LiquidBackground />
         <Providers>{children}</Providers>
         <Analytics />
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );

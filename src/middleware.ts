@@ -36,7 +36,16 @@ export async function middleware(req: NextRequest) {
   );
 
   // Refresh session if expired - important for Server Components
-  await supabase.auth.getUser();
+  // Wrapped in a timeout to prevent Vercel 504 MIDDLEWARE_INVOCATION_TIMEOUT
+  try {
+    const getUserPromise = supabase.auth.getUser().catch(() => ({ data: { user: null }, error: null }));
+    const timeoutPromise = new Promise<any>((_, reject) => 
+      setTimeout(() => reject(new Error('Supabase auth timeout')), 500)
+    );
+    await Promise.race([getUserPromise, timeoutPromise]);
+  } catch (error) {
+    console.warn('Middleware auth check failed or timed out:', error);
+  }
 
   // ===========================================
   // SECURITY HEADERS
